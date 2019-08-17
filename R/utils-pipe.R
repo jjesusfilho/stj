@@ -9,3 +9,5 @@
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
 NULL
+
+globalVariables(c("valor", "row_id", "hora", "hora","variavel"))
