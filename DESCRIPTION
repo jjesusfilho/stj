@@ -12,3 +12,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Language: pt_BR
 LazyData: true
+Suggests: 
+    roxygen2 (>= 6.1.1)
+Imports: 
+    rlang (>= 0.1.2),
+    magrittr (>= 1.5)
+RoxygenNote: 6.1.1
