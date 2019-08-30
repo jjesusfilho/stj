@@ -2,12 +2,12 @@
 % Please edit documentation in R/baixar_processo_stj.R
 \name{baixar_processo_stj}
 \alias{baixar_processo_stj}
-\title{Baixa processos do stj pelo número do registro}
+\title{Baixa processos do stj pelo número do do processo ou do registro}
 \usage{
-baixar_processo_stj(registro_stj = NULL, diretorio = ".")
+baixar_processo_stj(numero = NULL, diretorio = ".")
 }
 \arguments{
-\item{registro_stj}{Número do registro}
+\item{numero}{Número do processo ou do registro}
 
 \item{diretorio}{Diretório. Default para atual}
 }
@@ -15,11 +15,14 @@ baixar_processo_stj(registro_stj = NULL, diretorio = ".")
 html baixado no diretório indicado
 }
 \description{
-Baixa processos do stj pelo número do registro
+Você pode informar tanto o número do processo,
+    quanto o número do registro.
 }
 \examples{
 \dontrun{
-baxiar_processo_stj("2016/0074331-0")
+baixar_processo_stj("2016/0074331-0")
+baixar_processo_stj("01673163020133000000")
+baixar_processo_stj("0167316-30.2013.3.00.0000")
 
 }
 }
