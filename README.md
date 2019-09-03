@@ -55,6 +55,20 @@ Em seguida, ler o andamento processual:
 fases <- ler_fases_stj(diretorio = ".")
 ```
 
+Depois disso, você pode visualizar uma tabela com os títulos das
+decisões e respectivos códigos:
+
+``` r
+metadocs <- ler_metadocs_stj(diretorio = ".")
+```
+
+Por fim, pode baixar essas decisões:
+
+``` r
+dir.create("pdfs")
+baixar_pdfs_stj(metadocs$sequencial,diretorio = "pdfs")
+```
+
 ## Código de conduta
 
 Please note that the ‘stj’ project is released with a [Contributor Code

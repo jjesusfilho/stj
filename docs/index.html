@@ -92,6 +92,15 @@
 <a class="sourceLine" id="cb2-5" data-line-number="5">)</a></code></pre></div>
 <p>Uma vez obtido o dataframe com os metadados, você pode baixar os dados dos processos individualmente considerados:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">baixar_processo_stj</span>(df<span class="op">$</span>registro_stj, <span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<p>Depois de baixados, você pode ler os detalhes:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">detalhes &lt;-<span class="st"> </span><span class="kw">ler_detalhes_stj</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<p>Em seguida, ler o andamento processual:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">fases &lt;-<span class="st"> </span><span class="kw">ler_fases_stj</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<p>Depois disso, você pode visualizar uma tabela com os títulos das decisões e respectivos códigos:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">metadocs &lt;-<span class="st"> </span><span class="kw">ler_metadocs_stj</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<p>Por fim, pode baixar essas decisões:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="st">"pdfs"</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">baixar_pdfs_stj</span>(metadocs<span class="op">$</span>sequencial,<span class="dt">diretorio =</span> <span class="st">"pdfs"</span>)</a></code></pre></div>
 </div>
 <div id="codigo-de-conduta" class="section level2">
 <h2 class="hasAnchor">
@@ -124,6 +133,7 @@
 <li>Jose de Jesus Filho <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/https://orcid.org/0000-0001-7415-7383" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 </ul>
 </div>
+
 
       <div class="dev-status">
 <h2>Dev status</h2>
