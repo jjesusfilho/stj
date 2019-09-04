@@ -23,27 +23,29 @@ ler_detalhes_stj <- function(diretorio = ".", arquivos = NULL){
 
   }
 
-  processos <- stringr::str_extract(arquivos,"(?<=stj_).+?(?=.html)") %>%
-               stringr::str_replace("_","/")
 
-  purrr::map2_dfr(arquivos, processos,  purrr::possibly(~{
+
+  purrr::map_dfr(arquivos,  purrr::possibly(~{
+
+    processo <- stringr::str_extract(.x,"(?<=stj_).+?(?=.html)") %>%
+      stringr::str_remove_all("\\D+")
 
     resposta <- xml2::read_html(.x)
 
     variavel <-xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesLabel']") %>%
-       xml2::xml_text(trim=T)
-
-    valor <-xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesTexto']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble (registro_stj = .y,  variavel, valor)
+    valor <- xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesTexto']") %>%
+      xml2::xml_text(trim=T)
+
+    tibble::tibble(processo = processo,  variavel = variavel, valor = valor)
 
   },NULL)) %>%
-        dplyr::group_by_at(dplyr::vars(-valor)) %>%
-        dplyr::mutate(row_id = 1:dplyr::n()) %>%
-        dplyr::ungroup() %>%
-        tidyr::spread(key = variavel, value = valor) %>%
-        dplyr::select(-row_id) %>%
+    dplyr::group_by_at(dplyr::vars(-valor)) %>%
+    dplyr::mutate(row_id = 1:dplyr::n()) %>%
+    dplyr::ungroup() %>%
+    tidyr::spread(key = variavel, value = valor) %>%
+    dplyr::select(-row_id) %>%
     janitor::clean_names()
 
 }
