@@ -85,22 +85,25 @@
 <h2 class="hasAnchor">
 <a href="#como-usar" class="anchor"></a>Como usar</h2>
 <p>Para extrair dados de acórdãos do STJ, basta chamar a seguinte função:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">extrair_metadados_stj</span>(</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw"><a href="reference/extrair_metadados_stj.html">extrair_metadados_stj</a></span>(</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="dt">livre =</span> <span class="st">"homicídio"</span>,</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="dt">data_inicial =</span> <span class="st">"01/01/2018"</span>,</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="dt">data_final =</span> <span class="st">"31/12/2018"</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">)</a></code></pre></div>
 <p>Uma vez obtido o dataframe com os metadados, você pode baixar os dados dos processos individualmente considerados:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">baixar_processo_stj</span>(df<span class="op">$</span>registro_stj, <span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/baixar_processo_stj.html">baixar_processo_stj</a></span>(df<span class="op">$</span>registro_stj, <span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<p>Você pode usar usar tanto o número do registro, quanto o número do CNJ, este conforme resulução 65/2008. A função dá conta de distinguir as situação e realizar a busca corretamente.</p>
+<p>Você pode optar por baixar também os documentos relativos ao processo, tais como ementa, inteiro teor etc. Eles serão baixados em html. Ainda não avaliei se vale a pena incluir a opção de pdf. Os nomes dos documentos terão a palavra documento, seguido do código sequencial:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/baixar_processo_stj.html">baixar_processo_stj</a></span>(df<span class="op">$</span>registro_stj, <span class="dt">diretorio =</span> <span class="st">"."</span>, <span class="dt">documentos =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Depois de baixados, você pode ler os detalhes:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">detalhes &lt;-<span class="st"> </span><span class="kw">ler_detalhes_stj</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">detalhes &lt;-<span class="st"> </span><span class="kw"><a href="reference/ler_detalhes_stj.html">ler_detalhes_stj</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
 <p>Em seguida, ler o andamento processual:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">fases &lt;-<span class="st"> </span><span class="kw">ler_fases_stj</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
-<p>Depois disso, você pode visualizar uma tabela com os títulos das decisões e respectivos códigos:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">metadocs &lt;-<span class="st"> </span><span class="kw">ler_metadocs_stj</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
-<p>Por fim, pode baixar essas decisões:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="st">"pdfs"</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">baixar_pdfs_stj</span>(metadocs<span class="op">$</span>sequencial,<span class="dt">diretorio =</span> <span class="st">"pdfs"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">fases &lt;-<span class="st"> </span><span class="kw"><a href="reference/ler_fases_stj.html">ler_fases_stj</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<p>Caso você queira saber ao que corresponde cada um dos documentos, use a seguinte função:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">metadocs &lt;-<span class="st"> </span><span class="kw"><a href="reference/ler_metadocs_stj.html">ler_metadocs_stj</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
+<p>Caso queira baixar os documentos em um segundo momento, aí sim você pode optar por html ou pdf:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="st">"documentos"</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">baixar_pdfs_stj</span>(metadocs<span class="op">$</span>sequencial,<span class="dt">diretorio =</span> <span class="st">"documentos"</span>, <span class="dt">formato=</span><span class="st">"pdf"</span>)</a></code></pre></div>
 </div>
 <div id="codigo-de-conduta" class="section level2">
 <h2 class="hasAnchor">

@@ -36,7 +36,7 @@ ler_metadocs_stj <- function(arquivos = NULL, diretorio = ".", plano = "sequenti
       xml2::xml_text("onclick")
 
     sequencial <- xml2::xml_find_all(x,"//*[contains(@onclick,'sequencial')]") %>%
-      xml_attr("onclick") %>%
+      xml2::xml_attr("onclick") %>%
       stringr::str_extract("(?<=sequencial=)\\d+")
 
     tibble::tibble(processo,nome, sequencial) %>%

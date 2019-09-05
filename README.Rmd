@@ -47,6 +47,14 @@ Uma vez obtido o dataframe com os metadados, você pode baixar os dados dos proc
 baixar_processo_stj(df$registro_stj, diretorio = ".")
 ```
 
+Você pode usar usar tanto o número do registro, quanto o número do CNJ, este conforme resulução 65/2008. A função dá conta de distinguir as situação e realizar a busca corretamente.
+
+Você pode optar por baixar também os documentos relativos ao processo, tais como ementa, inteiro teor etc. Eles serão baixados em html. Ainda não avaliei se vale a pena incluir a opção de pdf. Os nomes dos documentos terão a palavra documento, seguido do código sequencial:
+
+```r
+baixar_processo_stj(df$registro_stj, diretorio = ".", documentos = TRUE)
+```
+
 Depois de baixados, você pode ler os detalhes:
 
 ```r
@@ -60,18 +68,17 @@ Em seguida, ler o andamento processual:
 fases <- ler_fases_stj(diretorio = ".")
 ```
 
-Depois disso, você pode visualizar uma tabela com os títulos das 
-decisões e respectivos códigos:
+Caso você queira saber ao que corresponde cada um dos documentos, use a seguinte função:
 
 ```r
 metadocs <- ler_metadocs_stj(diretorio = ".")
 ```
 
-Por fim, pode baixar essas decisões:
+Caso queira baixar os documentos em um segundo momento, aí sim você pode optar por html ou pdf:
 
 ```r
-dir.create("pdfs")
-baixar_pdfs_stj(metadocs$sequencial,diretorio = "pdfs")
+dir.create("documentos")
+baixar_pdfs_stj(metadocs$sequencial,diretorio = "documentos", formato="pdf")
 ```
 
 ## Código de conduta

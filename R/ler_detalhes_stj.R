@@ -17,7 +17,7 @@ ler_detalhes_stj <- function(diretorio = ".", arquivos = NULL){
 
     arquivos <- list.files(
       path = diretorio,
-      pattern = ".html",
+      pattern = "_\\d{2}_processo",
       full.names = T
     )
 
