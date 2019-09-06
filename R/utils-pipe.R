@@ -10,4 +10,6 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-globalVariables(c("valor", "row_id", "hora", "hora","variavel"))
+globalVariables(c("valor", "row_id", "hora", "hora","variavel",".","relator",
+                  "relator_a","rename","autuacao","registro","assunto_s",
+                  "alternativa","advogado","decisao","dispositivo"))

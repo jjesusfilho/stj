@@ -17,7 +17,7 @@ ler_detalhes_stj <- function(diretorio = ".", arquivos = NULL){
 
     arquivos <- list.files(
       path = diretorio,
-      pattern = "_\\d{2}_processo",
+      pattern = "_\\d{2}_(processo|registro)",
       full.names = T
     )
 
@@ -27,10 +27,15 @@ ler_detalhes_stj <- function(diretorio = ".", arquivos = NULL){
 
   purrr::map_dfr(arquivos,  purrr::possibly(~{
 
-    processo <- stringr::str_extract(.x,"(?<=stj_).+?(?=.html)") %>%
+    numero <- stringr::str_extract(.x,"(?<=stj_).+?(?=.html)") %>%
       stringr::str_remove_all("\\D+")
 
     resposta <- xml2::read_html(.x)
+
+    registro <- resposta %>%
+      xml2::xml_find_first("//span[@id='idSpanNumeroRegistro']") %>%
+      xml2::xml_text(trim=TRUE) %>%
+      stringr::str_remove_all("(\\(|\\))")
 
     variavel <-xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesLabel']") %>%
       xml2::xml_text(trim=T)
@@ -38,7 +43,7 @@ ler_detalhes_stj <- function(diretorio = ".", arquivos = NULL){
     valor <- xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesTexto']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble(processo = processo,  variavel = variavel, valor = valor)
+    tibble::tibble(numero = numero, registro = registro,  variavel = variavel, valor = valor)
 
   },NULL)) %>%
     dplyr::group_by_at(dplyr::vars(-valor)) %>%

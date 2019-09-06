@@ -34,7 +34,7 @@ ler_julgados_stj <- function(arquivos = NULL,
       xml2::xml_text() %>%
       stringr::str_trim()
 
-    processo_stj <- principal %>%
+    registro <- principal %>%
       xml2::xml_find_all("//div[@class='docTexto']/text()[preceding-sibling::br][2]") %>%
       xml2::xml_text() %>%
       stringr::str_trim()
@@ -63,7 +63,7 @@ ler_julgados_stj <- function(arquivos = NULL,
       ) %>%
       xml2::xml_text()
 
-    fonte <- publicacao %>% stringr::str_extract("\\w+")
+  #  fonte <- publicacao %>% stringr::str_extract("\\w+")
 
     data_publicacao <- pt_time_extract(publicacao)
 
@@ -71,25 +71,23 @@ ler_julgados_stj <- function(arquivos = NULL,
       xml2::xml_find_all("//div/h4[text()='Ementa']/following-sibling::pre[@class='docTexto']") %>%
       xml2::xml_text()
 
-    decisao <- principal %>%
+    dispositivo <- principal %>%
       xml2::xml_find_all(
         "//div/h4[text()='Ac\u00F3rd\u00E3o']/following-sibling::pre[@class='docTexto']"
       ) %>%
       xml2::xml_text()
 
     tibble::tibble(
-      arquivo = .x,
       processo,
       origem,
       classe,
-      processo_stj,
+      registro,
       relator,
       orgao_julgador,
       data_julgamento,
-      fonte,
       data_publicacao,
       ementa,
-      decisao
+      dispositivo
     )
   }, NULL))
 }

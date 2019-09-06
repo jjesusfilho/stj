@@ -1,9 +1,9 @@
 #' Baixar decisões do STJ
 #'
 #' @param livre campo livre
-#' @param operador "e" ou "adj", padrão é "e"
-#' @param aspas colocar entre aspas? padrão é TRUE
-#' @param repo informar o repositório, padrão é "ACOR"
+#' @param operador "e" ou "adj", padrão para "e"
+#' @param aspas colocar entre aspas? padrão para TRUE
+#' @param repo informar o repositóriorio, padrão para "ACOR"
 #' @param data_inicial data no formato "dd/mm/yyyy"
 #' @param data_final  data no formato "dd/mm/yyyy"
 #' @param diretorio padrão para diretorio atual
@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' baixar_julgados_stj(livre= "dissolução irregular")
+#' baixar_julgados_stj(livre= "dissolu\u00e7\u00e3o irregular")
 #' }
 baixar_julgados_stj<- function(livre = "", operador = "e", aspas = FALSE, repo = c("ACOR","SUMU","DTXT","INFJ"), data_inicial= "", data_final = "",diretorio = "." ){
 
@@ -26,7 +26,7 @@ baixar_julgados_stj<- function(livre = "", operador = "e", aspas = FALSE, repo =
   }
 
   if (operador != "e" & operador != "adj"){
-    stop("Você deve informar se o operador é 'e' ou 'adj'")
+    stop("Informar se o operador \u00e9 'e' ou 'adj'")
   }
 
   repo <- repo %>%

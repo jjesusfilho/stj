@@ -11,11 +11,11 @@ baixar_julgados_stj(livre = "", operador = "e", aspas = FALSE,
 \arguments{
 \item{livre}{campo livre}
 
-\item{operador}{"e" ou "adj", padrão é "e"}
+\item{operador}{"e" ou "adj", padrão para "e"}
 
-\item{aspas}{colocar entre aspas? padrão é TRUE}
+\item{aspas}{colocar entre aspas? padrão para TRUE}
 
-\item{repo}{informar o repositório, padrão é "ACOR"}
+\item{repo}{informar o repositóriorio, padrão para "ACOR"}
 
 \item{data_inicial}{data no formato "dd/mm/yyyy"}
 
@@ -31,6 +31,6 @@ Baixar decisões do STJ
 }
 \examples{
 \dontrun{
-baixar_julgados_stj(livre= "dissolução irregular")
+baixar_julgados_stj(livre= "dissolu\\u00e7\\u00e3o irregular")
 }
 }
