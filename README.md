@@ -83,6 +83,29 @@ dir.create("documentos")
 baixar_pdfs_stj(metadocs$sequencial,diretorio = "documentos", formato="pdf")
 ```
 
+## Pesquisa jurisprudencial
+
+Para a pesquisa jurisprudencial, além da pesquisa livre, você pode
+informar o repositório, a data inicial, a data final e o operador: “e”
+ou “adj”. O padrão para o repositório (“repo”), é “ACOR”, para acórdãos.
+Mas você pode informar també “SUMU” para súmulas,“DTXT” para
+monocráticas e “INFJ” para informativo jurisprudencia.
+
+``` r
+dir.create("julgados")
+
+baixar_julgados_stj(livre="dissolução regular",
+operador = "adj", repo = "ACOR",
+data_inicial = "01/01/2018", 
+data_final = "01/09/2019",diretorio="julgados")
+```
+
+Em seguida, basta ler os julgados:
+
+``` r
+df <- ler_julgados_stj(diretorio = "julgados")
+```
+
 ## Código de conduta
 
 Please note that the ‘stj’ project is released with a [Contributor Code

@@ -16,6 +16,9 @@ baixar_documento_stj(sequencial, plano = "sequential", diretorio = ".",
 
 \item{formato}{PDF ou HTML}
 }
+\value{
+htmls ou pdfs
+}
 \description{
 Baixar documentos do processo, ex. decisões, certidões etc
 }

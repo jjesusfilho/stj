@@ -5,7 +5,7 @@
 #' @param diretorio se não informado, diretório atual
 #' @param formato PDF ou HTML
 #'
-#' @return
+#' @return htmls ou pdfs
 #' @export
 #'
 #' @examples
