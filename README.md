@@ -80,7 +80,13 @@ optar por html ou pdf:
 
 ``` r
 dir.create("documentos")
-baixar_pdfs_stj(metadocs$sequencial,diretorio = "documentos", formato="pdf")
+baixar_documento_stj(metadocs$sequencial,diretorio = "documentos", formato="pdf")
+```
+
+Em seguida, você pode ler tais documentos
+
+``` r
+docs <- ler_documento_stj(diretorio = "documentos")
 ```
 
 ## Pesquisa jurisprudencial

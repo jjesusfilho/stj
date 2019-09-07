@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ler detalhes dos processos do STJ — ler_detalhes_stj • stj</title>
+<title>Organiza dados do stj a partir das bases julgados e detalhes — organizar_stj • stj</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,8 @@
 
 
 
-<meta property="og:title" content="Ler detalhes dos processos do STJ — ler_detalhes_stj" />
-<meta property="og:description" content="Ler detalhes dos processos do STJ" />
+<meta property="og:title" content="Organiza dados do stj a partir das bases julgados e detalhes — organizar_stj" />
+<meta property="og:description" content="Organiza dados do stj a partir das bases julgados e detalhes" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,38 +101,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Ler detalhes dos processos do STJ</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/stj/blob/master/R/ler_detalhes_stj.R'><code>R/ler_detalhes_stj.R</code></a></small>
-    <div class="hidden name"><code>ler_detalhes_stj.Rd</code></div>
+    <h1>Organiza dados do stj a partir das bases julgados e detalhes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/stj/blob/master/R/organizar_stj.R'><code>R/organizar_stj.R</code></a></small>
+    <div class="hidden name"><code>organizar_stj.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Ler detalhes dos processos do STJ</p>
+    <p>Organiza dados do stj a partir das bases julgados e detalhes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ler_detalhes_stj</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>organizar_stj</span>(<span class='no'>detalhes</span>, <span class='no'>julgados</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>diretorio</th>
-      <td><p>Diretório se arquivos não forem informados</p></td>
+      <th>detalhes</th>
+      <td><p>dados obtidos com ler_datalhes_stj</p></td>
     </tr>
     <tr>
-      <th>arquivos</th>
-      <td><p>Se os caminhos para os arquivos forem fornecidos
-o diretório é ignorado.</p></td>
+      <th>julgados</th>
+      <td><p>dados obtidos com ler_julgados_stj</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tibble com detalhes do processo</p>
+    <p>dados organizadps</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>ler_detalhes_stj</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>organizar_stj</span>(<span class='no'>detalhes</span>, <span class='no'>julgados</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
