@@ -17,7 +17,7 @@ ler_metadocs_stj <- function(arquivos = NULL, diretorio = ".", plano = "sequenti
 
   if (is.null(arquivos)){
 
-    arquivos <- list.files(diretorio, "_\\d{2}_processo",full.names = TRUE)
+    arquivos <- list.files(diretorio, "_\\d{2}_(processo|registro)",full.names = TRUE)
 
   }
 
