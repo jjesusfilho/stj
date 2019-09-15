@@ -80,7 +80,7 @@ baixar_julgados_stj<- function(livre = "", operador = "e", aspas = FALSE, repo =
   #   as.numeric()
 
   paginas<- content %>%
-    xml2::xml_find_first("//a/@href") %>%
+    xml2::xml_find_first("//span[@class='labellinha']/following-sibling::span") %>%
     xml2::xml_text() %>%
     stringr::str_extract("\\d+") %>%
     as.numeric()
