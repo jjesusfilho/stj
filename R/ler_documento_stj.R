@@ -25,7 +25,7 @@ ler_documento_stj <- function(diretorio = ".", arquivos = NULL, formato = c("htm
 
   purrr::map_dfr(arquivos,purrr::possibly(~{
 
-    sequencial <- stringr::str_extract(.x,"(?<=sequencial_)\\d+")
+    sequencial <- stringr::str_extract(.x,"(?<=documento_)\\d+")
 
     if (formato =="html"){
     documento <- xml2::read_html(.x) %>%
