@@ -1,4 +1,4 @@
-sequencial<-function(arquivos = NULL, diretorio = ".", plano = "sequential"){
+sequencial<-function(arquivos = NULL, diretorio = "."){
 
   if (is.null(arquivos)){
 
@@ -8,9 +8,7 @@ sequencial<-function(arquivos = NULL, diretorio = ".", plano = "sequential"){
 
 
 
-  future::plan(plano)
-
-  furrr::future_map_dfr(arquivos,purrr::possibly(~{
+  purrr::map_dfr(arquivos,purrr::possibly(~{
 
     processo <- stringr::str_extract(.x,"(?<=stj_)\\d.+(?=\\.html)") %>%
       stringr::str_remove_all("\\D+")
