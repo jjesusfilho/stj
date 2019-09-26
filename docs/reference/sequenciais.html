@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Baixar documentos do processo, ex. decisões, certidões etc — baixar_documento_stj • stj</title>
+<title>Extrai os números sequenciais dos htmls obtidos com baixar_processo_trf1. — sequenciais • stj</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,8 @@
 
 
 
-<meta property="og:title" content="Baixar documentos do processo, ex. decisões, certidões etc — baixar_documento_stj" />
-<meta property="og:description" content="Baixar documentos do processo, ex. decisões, certidões etc" />
+<meta property="og:title" content="Extrai os números sequenciais dos htmls obtidos com baixar_processo_trf1. — sequenciais" />
+<meta property="og:description" content="Extrai os números sequenciais dos htmls obtidos com baixar_processo_trf1." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,46 +101,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Baixar documentos do processo, ex. decisões, certidões etc</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/stj/blob/master/R/baixar_documento_stj.R'><code>R/baixar_documento_stj.R</code></a></small>
-    <div class="hidden name"><code>baixar_documento_stj.Rd</code></div>
+    <h1>Extrai os números sequenciais dos htmls obtidos com baixar_processo_trf1.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/stj/blob/master/R/sequenciais.R'><code>R/sequenciais.R</code></a></small>
+    <div class="hidden name"><code>sequenciais.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Baixar documentos do processo, ex. decisões, certidões etc</p>
+    <p>Extrai os números sequenciais dos htmls obtidos com baixar_processo_trf1.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>baixar_documento_stj</span>(<span class='no'>sequencial</span>, <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>formato</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"PDF"</span>,
-  <span class='st'>"HTML"</span>))</pre>
+    <pre class="usage"><span class='fu'>sequenciais</span>(<span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sequencial</th>
-      <td><p>códigos dos documentos obtido com ler_metadocs_stj</p></td>
+      <th>arquivos</th>
+      <td><p>Se nulo, informar o diretório</p></td>
     </tr>
     <tr>
       <th>diretorio</th>
-      <td><p>se não informado, diretório atual</p></td>
-    </tr>
-    <tr>
-      <th>formato</th>
-      <td><p>PDF ou HTML</p></td>
-    </tr>
-    <tr>
-      <th>plano</th>
-      <td><p>ver `future::plan`</p></td>
+      <td><p>Informar se os arquivos não foram informados</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>htmls ou pdfs</p>
+    <p>tibble</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>baixar_documento_stj</span>(<span class='st'>"1764491"</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>sequenciais</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

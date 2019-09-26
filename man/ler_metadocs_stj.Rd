@@ -4,8 +4,7 @@
 \alias{ler_metadocs_stj}
 \title{Ler metadados do STJ}
 \usage{
-ler_metadocs_stj(arquivos = NULL, diretorio = ".",
-  plano = "sequential")
+ler_metadocs_stj(arquivos = NULL, diretorio = ".")
 }
 \arguments{
 \item{arquivos}{vetor com caminhos para arquivos}

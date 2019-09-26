@@ -12,7 +12,7 @@
 #' \dontrun{
 #' baixar_documento_stj("1764491")
 #' }
-baixar_documento_stj <- function(sequencial, plano = "sequential", diretorio = ".", formato=c("PDF","HTML"))
+baixar_documento_stj <- function(sequencial,  diretorio = ".", formato=c("PDF","HTML"))
   {
 
   formato <- toupper(formato) %>%
@@ -20,9 +20,9 @@ baixar_documento_stj <- function(sequencial, plano = "sequential", diretorio = "
 
   url<-paste0("https://ww2.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ATC?seq=",sequencial,"&tipo=0&nreg=&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=&formato=",formato,"&salvar=false")
 
-  future::plan(plano)
 
-  furrr::future_map2(url,sequencial, purrr::possibly(~{
+
+   purrr::walk2(url,sequencial, purrr::possibly(~{
 
     arquivo <- paste0("_sequencial_",.y,".",tolower(formato))
 

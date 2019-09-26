@@ -4,17 +4,17 @@
 \alias{baixar_documento_stj}
 \title{Baixar documentos do processo, ex. decisões, certidões etc}
 \usage{
-baixar_documento_stj(sequencial, plano = "sequential", diretorio = ".",
-  formato = c("PDF", "HTML"))
+baixar_documento_stj(sequencial, diretorio = ".", formato = c("PDF",
+  "HTML"))
 }
 \arguments{
 \item{sequencial}{códigos dos documentos obtido com ler_metadocs_stj}
 
-\item{plano}{ver `future::plan`}
-
 \item{diretorio}{se não informado, diretório atual}
 
 \item{formato}{PDF ou HTML}
+
+\item{plano}{ver `future::plan`}
 }
 \value{
 htmls ou pdfs

@@ -13,7 +13,7 @@
 #' \dontrun{
 #' ler_metadocs_stj(diretorio=".")
 #' }
-ler_metadocs_stj <- function(arquivos = NULL, diretorio = ".", plano = "sequential"){
+ler_metadocs_stj <- function(arquivos = NULL, diretorio = "."){
 
   if (is.null(arquivos)){
 
@@ -23,9 +23,8 @@ ler_metadocs_stj <- function(arquivos = NULL, diretorio = ".", plano = "sequenti
 
 
 
-  future::plan(plano)
 
-  furrr::future_map_dfr(arquivos,purrr::possibly(~{
+  purrr::map_dfr(arquivos,purrr::possibly(~{
 
     processo <- stringr::str_extract(.x,"(?<=stj_)\\d.+(?=\\.html)") %>%
       stringr::str_remove_all("\\D+")

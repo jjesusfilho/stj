@@ -1,4 +1,16 @@
-sequencial<-function(arquivos = NULL, diretorio = "."){
+#' Extrai os números sequenciais dos htmls obtidos com baixar_processo_trf1.
+#'
+#' @param arquivos Se nulo, informar o diretório
+#' @param diretorio Informar se os arquivos não foram informados
+#'
+#' @return tibble
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' df <- sequenciais()
+#' }
+sequenciais<-function(arquivos = NULL, diretorio = "."){
 
   if (is.null(arquivos)){
 

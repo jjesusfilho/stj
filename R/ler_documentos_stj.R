@@ -13,7 +13,7 @@
 #' \dontrun{
 #' df <- ler_documento_pdf(diretorio = ".")
 #' }
-ler_documento_stj <- function(diretorio = ".", arquivos = NULL, formato = c("html","pdf")){
+ler_documentos_stj <- function(diretorio = ".", arquivos = NULL, formato = c("html","pdf")){
 
   if (is.null(arquivos)){
 

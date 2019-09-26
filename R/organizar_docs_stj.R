@@ -14,13 +14,13 @@
 #' }
 organizar_docs_stj <- function(metadocs,docs){
   metadocs %>%
-    dplyr::select(registro=processo,sequencial,nome) %>%
+    dplyr::select(registro=processo,sequenciais,nome) %>%
     dplyr::mutate(registro = sub(registro,5,4,"/"),
                   registro = sub(registro,13,12,"-")) %>%
     dplyr::right_join(docs,by="sequencial") %>%
     dplyr::filter(stringr::str_detect(nome,"(?i)(relat.rio|voto|ementa|decis.o)")) %>%
     stats::na.omit() %>%
-    dplyr::select(-sequencial) %>%
+    dplyr::select(-sequenciais) %>%
     tidyr::spread("nome","documento") %>%
     janitor::clean_names()
 
