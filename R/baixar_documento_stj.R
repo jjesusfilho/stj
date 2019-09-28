@@ -1,7 +1,6 @@
 #' Baixar documentos do processo, ex. decisões, certidões etc
 #'
-#' @param sequencial códigos dos documentos obtido com ler_metadocs_stj
-#' @param plano ver `future::plan`
+#' @param sequencial códigos dos documentos obtidos com ler_metadocs_stj
 #' @param diretorio se não informado, diretório atual
 #' @param formato PDF ou HTML
 #'

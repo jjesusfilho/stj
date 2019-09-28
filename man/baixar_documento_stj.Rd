@@ -8,13 +8,11 @@ baixar_documento_stj(sequencial, diretorio = ".", formato = c("PDF",
   "HTML"))
 }
 \arguments{
-\item{sequencial}{códigos dos documentos obtido com ler_metadocs_stj}
+\item{sequencial}{códigos dos documentos obtidos com ler_metadocs_stj}
 
 \item{diretorio}{se não informado, diretório atual}
 
 \item{formato}{PDF ou HTML}
-
-\item{plano}{ver `future::plan`}
 }
 \value{
 htmls ou pdfs
