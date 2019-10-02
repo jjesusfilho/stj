@@ -4,15 +4,15 @@
 \alias{ler_documentos_stj}
 \title{Ler documentos do STJ}
 \usage{
-ler_documentos_stj(diretorio = ".", arquivos = NULL,
+ler_documentos_stj(arquivos = NULL, diretorio = ".",
   formato = c("html", "pdf"))
 }
 \arguments{
-\item{diretorio}{informar diretório, apenas se
-não informar arquivos.}
-
 \item{arquivos}{se arquivos for NULL,
 informar diretório.}
+
+\item{diretorio}{informar diretório, apenas se
+não informar arquivos.}
 
 \item{formato}{"html" ou "pdf"}
 }
