@@ -20,7 +20,7 @@ organizar_docs_stj <- function(metadocs,docs){
     dplyr::right_join(docs,by="sequencial") %>%
     dplyr::filter(stringr::str_detect(nome,"(?i)(relat.rio|voto|ementa|decis.o)")) %>%
     stats::na.omit() %>%
-    tidyr::pivot_wider(ic_cols=c("sequencial","registro"),names_from = "nome",
+    tidyr::pivot_wider(id_cols=c("sequencial","registro"),names_from = "nome",
                        values_from = "documento") %>%
     dplyr::select(-sequencial) %>%
     janitor::clean_names()
