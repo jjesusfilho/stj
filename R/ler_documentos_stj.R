@@ -13,7 +13,7 @@
 #' \dontrun{
 #' df <- ler_documento_pdf(diretorio = ".")
 #' }
-ler_documentos_stj <- function(diretorio = ".", arquivos = NULL, formato = c("html","pdf")){
+ler_documentos_stj <- function(arquivos = NULL,diretorio = ".",  formato = c("html","pdf")){
 
   if (is.null(arquivos)){
 
@@ -25,7 +25,7 @@ ler_documentos_stj <- function(diretorio = ".", arquivos = NULL, formato = c("ht
 
   purrr::map_dfr(arquivos,purrr::possibly(~{
 
-    sequencial <- stringr::str_extract(.x,"(?<=documento_)\\d+")
+    sequencial <- stringr::str_extract(.x,"(?<=sequencial_)\\d+")
 
     if (formato =="html"){
     documento <- xml2::read_html(.x) %>%
