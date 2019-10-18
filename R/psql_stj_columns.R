@@ -6,7 +6,7 @@
 #' @return a data.frame with 18 columns describing the table columns.
 #' @export
 #'
-psql_columns <- function(con, tbl = NULL) {
+psql_stj_columns <- function(con, tbl = NULL) {
   query <- glue::glue_sql(
     "SELECT *
                          FROM information_schema.columns
@@ -15,6 +15,6 @@ psql_columns <- function(con, tbl = NULL) {
                         ",
     .con = con
   )
-  
+
   DBI::dbGetQuery(con, query)
 }

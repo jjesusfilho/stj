@@ -11,8 +11,6 @@ ler_metadocs_stj(arquivos = NULL, diretorio = ".")
 
 \item{diretorio}{se arquivos for NULL, default para
 diretório atual}
-
-\item{plano}{ver `future::plan`}
 }
 \value{
 tibble com números dos processos, metadado dos docs

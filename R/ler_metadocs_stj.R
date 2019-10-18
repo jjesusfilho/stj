@@ -3,7 +3,6 @@
 #' @param arquivos vetor com caminhos para arquivos
 #' @param diretorio se arquivos for NULL, default para
 #'     diretório atual
-#' @param plano ver `future::plan`
 #'
 #' @return tibble com números dos processos, metadado dos docs
 #'     e sequencial para ser usado na função baixar_pdf_stj
