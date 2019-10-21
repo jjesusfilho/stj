@@ -46,6 +46,5 @@ df <-  purrr::map_dfr(arquivos,purrr::possibly(~{
 
   },NULL))
 
-
-df %>%   purrr::modify(names(df), ~tidyr::unnest(df,keep_empty=TRUE,col = .x))
+df %>%   purrr::modify(names(df)[-1], ~tidyr::unnest(df,keep_empty=TRUE,col = .x))
 }
