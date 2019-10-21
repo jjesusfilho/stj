@@ -23,7 +23,7 @@ ler_documentos_stj <- function(arquivos = NULL,diretorio = ".",  formato = c("ht
   formato <- formato %>%
         `[`(1)
 
-  purrr::map_dfr(arquivos,purrr::possibly(~{
+df <-  purrr::map_dfr(arquivos,purrr::possibly(~{
 
     sequencial <- stringr::str_extract(.x,"(?<=sequencial_)\\d+")
 
@@ -44,7 +44,8 @@ ler_documentos_stj <- function(arquivos = NULL,diretorio = ".",  formato = c("ht
 
     tibble::tibble(sequencial,documento)
 
+  },NULL))
 
-  },NA_character_))
 
+df %>%   purrr::modify(names(df), ~tidyr::unnest(df,keep_empty=TRUE,col = .x))
 }
