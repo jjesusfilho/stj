@@ -45,6 +45,6 @@ ler_documentos_stj <- function(arquivos = NULL,diretorio = ".",  formato = c("ht
     tibble::tibble(sequencial,documento)
 
 
-  },NULL))
+  },NA_character_))
 
 }
