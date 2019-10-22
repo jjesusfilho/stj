@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Organiza todos os documentos decisivos, colocando-os numa única observação — organizar_docs_stj • stj</title>
+<title>Organiza todos os documentos decisórios — organizar_docs_stj • stj</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,7 @@
 
 
 
-<meta property="og:title" content="Organiza todos os documentos decisivos, colocando-os numa única observação — organizar_docs_stj" />
-<meta property="og:description" content="Organiza todos os documentos decisivos, colocando-os numa única observação" />
+<meta property="og:title" content="Organiza todos os documentos decisórios — organizar_docs_stj" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,50 +100,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Organiza todos os documentos decisivos, colocando-os numa única observação</h1>
+    <h1>Organiza todos os documentos decisórios</h1>
     <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/stj/blob/master/R/organizar_docs_stj.R'><code>R/organizar_docs_stj.R</code></a></small>
     <div class="hidden name"><code>organizar_docs_stj.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Organiza todos os documentos decisivos, colocando-os numa única observação</p>
     </div>
 
-    <pre class="usage"><span class='fu'>organizar_docs_stj</span>(<span class='no'>metadocs</span>, <span class='no'>docs</span>)</pre>
+    <pre class="usage"><span class='fu'>organizar_docs_stj</span>(<span class='kw'>metadocs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>docs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>plano</span> <span class='kw'>=</span> <span class='st'>"sequencial"</span>, <span class='kw'>workers</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>metadocs</th>
-      <td><p>retorno da função ler_metadocs_stj</p></td>
+      <td><p>Resposta da função ler_metadocs_stj</p></td>
     </tr>
     <tr>
       <th>docs</th>
-      <td><p>retorno da função ler_documentos_stj</p></td>
+      <td><p>Resposta da função ler_documentos_stj</p></td>
+    </tr>
+    <tr>
+      <th>plano</th>
+      <td><p>Use plano 'multicore' ou 'multiprocess' apenas
+se for rodar via bash para paralelizar</p></td>
+    </tr>
+    <tr>
+      <th>workers</th>
+      <td><p>Se for paralelizar, apenas via bash,
+o número de processos deve ser menor que o
+número de cores. Essa operação usa 100<!-- % de cada cpu} --></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tibble</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Se você quer manter documentos que não são decisórios,
-    tais como certidões, não use esta função.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>organizar_docs_stj</span>(<span class='no'>metadocs</span>, <span class='no'>docs</span>)
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

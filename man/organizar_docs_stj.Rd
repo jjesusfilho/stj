@@ -2,20 +2,28 @@
 % Please edit documentation in R/organizar_docs_stj.R
 \name{organizar_docs_stj}
 \alias{organizar_docs_stj}
-\title{Organiza todos os documentos decisivos, colocando-os numa única observação}
+\title{Organiza todos os documentos decisórios}
 \usage{
-organizar_docs_stj(metadocs, docs)
+organizar_docs_stj(metadocs = NULL, docs = NULL,
+  plano = "sequencial", workers = 1)
 }
 \arguments{
-\item{metadocs}{retorno da função ler_metadocs_stj}
+\item{metadocs}{Resposta da função ler_metadocs_stj}
 
-\item{docs}{retorno da função ler_documentos_stj}
+\item{docs}{Resposta da função ler_documentos_stj}
+
+\item{plano}{Use plano 'multicore' ou 'multiprocess' apenas
+se for rodar via bash para paralelizar}
+
+\item{workers}{Se for paralelizar, apenas via bash,
+o número de processos deve ser menor que o
+número de cores. Essa operação usa 100% de cada cpu}
 }
 \value{
 tibble
 }
 \description{
-Organiza todos os documentos decisivos, colocando-os numa única observação
+Organiza todos os documentos decisórios
 }
 \details{
 Se você quer manter documentos que não são decisórios,
@@ -25,4 +33,5 @@ Se você quer manter documentos que não são decisórios,
 \dontrun{
 df <- organizar_docs_stj(metadocs, docs)
 }
+
 }
