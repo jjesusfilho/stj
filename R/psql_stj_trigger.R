@@ -14,18 +14,15 @@
 
 psql_stj_trigger <- function(con,tbl,config="pg_catalog.portuguese"){
 
-  a<-"A"
-  b<-"B"
-  assunto<-"new.assunto"
+
   julgado="new.julgado"
   f_name<-paste0(tbl,"_trigger()")
 
   q<-glue::glue_sql("CREATE FUNCTION {DBI::SQL(f_name)} RETURNS trigger AS $$
 begin
   new.document_tokens :=
-     setweight(to_tsvector({config},coalesce({`assunto`},'')), {a}) ||
-     setweight(to_tsvector({config},coalesce({`julgado`},'')), {b});
-  return new;
+     to_tsvector({config},coalesce({`julgado`},''));
+     return new;
 end
 $$ LANGUAGE plpgsql;",.con=con)
 

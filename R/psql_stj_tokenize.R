@@ -16,6 +16,7 @@
 psql_stj_tokenize <- function(con, tbl) {
   target <- "document_tokens"
   idx <- paste0(tbl,"_idx")
+  julgado <- "julgado"
   query <- glue::glue_sql("ALTER TABLE {`tbl`} ADD COLUMN {`target`} TSVECTOR", .con = con)
   config="pg_catalog.portuguese"
   res <- DBI::dbSendQuery(con, query)

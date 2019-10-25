@@ -2,36 +2,23 @@
 % Please edit documentation in R/organizar_docs_stj.R
 \name{organizar_docs_stj}
 \alias{organizar_docs_stj}
-\title{Organiza todos os documentos decisórios}
+\title{organizar documentos}
 \usage{
 organizar_docs_stj(metadocs = NULL, docs = NULL,
   plano = "sequencial", workers = 1)
 }
 \arguments{
-\item{metadocs}{Resposta da função ler_metadocs_stj}
+\item{metadocs}{tibble lida com ler_metadocs_stj}
 
-\item{docs}{Resposta da função ler_documentos_stj}
+\item{docs}{docs}
 
-\item{plano}{Use plano 'multicore' ou 'multiprocess' apenas
-se for rodar via bash para paralelizar}
+\item{plano}{usar somente se for via bash}
 
-\item{workers}{Se for paralelizar, apenas via bash,
-o número de processos deve ser menor que o
-número de cores. Essa operação usa 100% de cada cpu}
+\item{workers}{usar somente se for via bash}
 }
 \value{
 tibble
 }
 \description{
-Organiza todos os documentos decisórios
-}
-\details{
-Se você quer manter documentos que não são decisórios,
-    tais como certidões, não use esta função.
-}
-\examples{
-\dontrun{
-df <- organizar_docs_stj(metadocs, docs)
-}
-
+organizar documentos
 }
