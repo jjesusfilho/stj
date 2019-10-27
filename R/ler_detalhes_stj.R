@@ -38,19 +38,19 @@ ler_detalhes_stj <- function(diretorio = ".", arquivos = NULL){
       stringr::str_remove_all("(\\(|\\))")
 
     variavel <-xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesLabel']") %>%
-      xml2::xml_text(trim=T)
+      xml2::xml_text(trim=T) %>%
+      dplyr::na_if("_         :")
+
+    p <- 2:(stringr::str_which(variavel,"LOCALIZA")-1)
+
+    parte <- vector(length=length(variavel)) %>%
+      replace(p,TRUE)
 
     valor <- xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesTexto']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble(numero = numero, registro = registro,  variavel = variavel, valor = valor)
+    tibble::tibble(numero = numero, registro = registro, parte, variavel = variavel, valor = valor) %>%
+      tidyr::fill(variavel)
 
-  },NULL)) %>%
-    dplyr::group_by_at(dplyr::vars(-valor)) %>%
-    dplyr::mutate(row_id = 1:dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    tidyr::spread(key = variavel, value = valor) %>%
-    dplyr::select(-row_id) %>%
-    janitor::clean_names()
-
+  },NULL))
 }
