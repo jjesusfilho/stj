@@ -41,15 +41,11 @@ ler_detalhes_stj <- function(diretorio = ".", arquivos = NULL){
       xml2::xml_text(trim=T) %>%
       dplyr::na_if("_         :")
 
-    p <- 2:(stringr::str_which(variavel,"LOCALIZA")-1)
-
-    parte <- vector(length=length(variavel)) %>%
-      replace(p,TRUE)
 
     valor <- xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesTexto']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble(numero = numero, registro = registro, parte, variavel = variavel, valor = valor) %>%
+    tibble::tibble(numero = numero, registro = registro,  variavel = variavel, valor = valor) %>%
       tidyr::fill(variavel)
 
   },NULL))
