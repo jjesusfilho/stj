@@ -100,9 +100,7 @@ select *
 ",.con=con)
 
   partes<-DBI::dbGetQuery(con,query) %>%
-    dplyr::mutate(parte = stringr::str_replace(parte,"^$","v1")) %>%
-    tidyr::pivot_wider(names_from = parte, values_from=parte_nome) %>%
-    dplyr::select(-c(partes_id,numero)) %>%
+    dplyr::select(-c(partes_id)) %>%
     janitor::clean_names()
 
 
@@ -125,9 +123,7 @@ select *
   WHERE {`extra_dados`}.registro IN ({df$registro*})
 ",.con=con)
 
-  extra_dados<-DBI::dbGetQuery(con,query) %>%
-    dplyr::select(registro,extra=variavel,info_extra=valor)  %>%
-    tidyr::pivot_wider(names_from=extra,values_from = info_extra)
+  extra_dados<-DBI::dbGetQuery(con,query)
 
   detalhes <- "detalhes"
 
@@ -137,21 +133,19 @@ select *
   WHERE {`detalhes`}.registro IN ({df$registro*})
 ",.con=con)
 
-  detalhes<-DBI::dbGetQuery(con,query) %>%
-    dplyr::select(registro,detalhe=variavel, detalhe_valor=valor)
+  detalhes<-DBI::dbGetQuery(con,query)
 
-  detalhes <- detalhes %>%
-    dplyr::mutate(detalhe = stringr::str_replace(detalhe,"^$","v1")) %>%
-    tidyr::pivot_wider(names_from=detalhe,values_from=detalhe_valor) %>%
-    janitor::clean_names() %>%
-    dplyr::mutate(v1=NULL)
+  tudo_na<- function(x){
+    all(is.na(x))
+  }
 
-  dados %>%
-    dplyr::left_join(partes, by='registro') %>%
-    dplyr::left_join(detalhes, by="registro") %>%
-    dplyr::left_join(extra_dados, by = "registro") %>%
-    dplyr::left_join(df,by="registro") %>%
+  dd<-  dados %>%
+    dplyr::left_join(partes) %>%
+    dplyr::left_join(detalhes) %>%
+    dplyr::left_join(extra_dados) %>%
+    dplyr::left_join(df) %>%
     dplyr::mutate(julgado = stringr::str_replace_all(julgado,"\n","<br>"))
 
+  dd[, colSums(is.na(dd)) != nrow(dd)]
 
 }
