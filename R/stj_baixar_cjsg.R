@@ -105,7 +105,7 @@ stj_baixar_cjsg  <- function(livre = "",
   seq(1,pages,10) %>%
     purrr::walk(purrr::possibly(~{
 
-      arquivo <- file.path(diretorio,paste0(stringr::str_replace_all(Sys.time(),"\\D","_"),"_",base,"_pagina_",.x, ".html"))
+      arquivo <- file.path(diretorio,paste0(stringr::str_replace_all(Sys.time(),"\\D","_"),"_",base,"_data_inicial",dt, "_data_final_",df,"_pagina_",.x, ".html"))
 
       httr::POST(paste0("https://scon.stj.jus.br/SCON/",b1,"/toc.jsp"),
                 body = list(
