@@ -4,8 +4,7 @@
 \alias{baixar_processo_stj}
 \title{Baixa processos do stj pelo número do do processo ou do registro}
 \usage{
-baixar_processo_stj(numero = NULL, diretorio = ".",
-  documentos = FALSE)
+baixar_processo_stj(numero = NULL, diretorio = ".", documentos = FALSE)
 }
 \arguments{
 \item{numero}{Número do processo ou do registro}

@@ -26,7 +26,6 @@ Imports:
     httr,
     xml2,
     abjutils,
-    glue,
     tibble,
     furrr,
     future,
@@ -34,10 +33,9 @@ Imports:
     tidyselect,
     pdftools,
     htmltools,
-    DBI,
-    RPostgres,
-    dbx,
-    stats
-RoxygenNote: 6.1.1
+    stats,
+    glue,
+    progress
+RoxygenNote: 7.1.1
 URL: https://github.com/jjesusfilho/stj
 BugReports: https://github.com/jjesusfilho/stj/issues

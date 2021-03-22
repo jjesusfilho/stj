@@ -4,8 +4,12 @@
 \alias{organizar_docs_stj}
 \title{organizar documentos}
 \usage{
-organizar_docs_stj(metadocs = NULL, docs = NULL,
-  plano = "sequencial", workers = 1)
+organizar_docs_stj(
+  metadocs = NULL,
+  docs = NULL,
+  plano = "sequencial",
+  workers = 1
+)
 }
 \arguments{
 \item{metadocs}{tibble lida com ler_metadocs_stj}

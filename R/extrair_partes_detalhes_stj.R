@@ -16,9 +16,9 @@ extrair_partes_detalhes_stj <- function(df = NULL, dados = c("partes","detalhes"
   dados <- magrittr::extract(dados,1)
 
   detalhes<-c("PROCESSO:",
-              "LOCALIZAÇÃO:", "TIPO:", "AUTUAÇÃO:", "NÚMERO ÚNICO:",
+              "LOCALIZA\u00c7\u00c3O:", "TIPO:", "AUTUA\u00c7\u00c3O:", "N\u00daMERO \u00daNICO:",
               "RELATOR(A):", "RAMO DO DIREITO:", "ASSUNTO(S):", "TRIBUNAL DE ORIGEM:",
-              "NÚMEROS DE ORIGEM:", "", "ÚLTIMA FASE:",
+              "N\u00daMEROS DE ORIGEM:", "", "\u00daLTIMA FASE:",
               "T. ORIGEM :", "UF        :",  "A.CENTRAL :")
 
 

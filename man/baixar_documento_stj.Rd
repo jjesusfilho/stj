@@ -4,8 +4,7 @@
 \alias{baixar_documento_stj}
 \title{Baixar documentos do processo, ex. decisões, certidões etc}
 \usage{
-baixar_documento_stj(sequencial, diretorio = ".", formato = c("PDF",
-  "HTML"))
+baixar_documento_stj(sequencial, diretorio = ".", formato = c("PDF", "HTML"))
 }
 \arguments{
 \item{sequencial}{códigos dos documentos obtidos com ler_metadocs_stj}

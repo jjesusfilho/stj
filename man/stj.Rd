@@ -3,7 +3,6 @@
 \docType{package}
 \name{stj}
 \alias{stj}
-\alias{stj-package}
 \title{\code{stj} package}
 \description{
 Baixa  e organiza decisões do STJ

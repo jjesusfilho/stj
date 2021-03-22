@@ -4,8 +4,11 @@
 \alias{ler_documentos_stj}
 \title{Ler documentos do STJ}
 \usage{
-ler_documentos_stj(arquivos = NULL, diretorio = ".",
-  formato = c("html", "pdf"))
+ler_documentos_stj(
+  arquivos = NULL,
+  diretorio = ".",
+  formato = c("html", "pdf")
+)
 }
 \arguments{
 \item{arquivos}{se arquivos for NULL,

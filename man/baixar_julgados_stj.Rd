@@ -4,9 +4,15 @@
 \alias{baixar_julgados_stj}
 \title{Baixar decisões do STJ}
 \usage{
-baixar_julgados_stj(livre = "", operador = "e", aspas = FALSE,
-  repo = c("ACOR", "SUMU", "DTXT", "INFJ"), data_inicial = "",
-  data_final = "", diretorio = ".")
+baixar_julgados_stj(
+  livre = "",
+  operador = "e",
+  aspas = FALSE,
+  repo = c("ACOR", "SUMU", "DTXT", "INFJ"),
+  data_inicial = "",
+  data_final = "",
+  diretorio = "."
+)
 }
 \arguments{
 \item{livre}{campo livre}
@@ -31,6 +37,6 @@ Baixar decisões do STJ
 }
 \examples{
 \dontrun{
-baixar_julgados_stj(livre= "dissolu\\u00e7\\u00e3o irregular")
+baixar_julgados_stj(livre= "dissolu\u00e7\u00e3o irregular")
 }
 }

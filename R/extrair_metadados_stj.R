@@ -88,7 +88,7 @@ livre <-  abjutils::rm_accent(livre) %>%
   search_time<-lubridate::now(tz="America/Sao_Paulo")
 
   df<- seq(1,pages,10) %>%
-    purrr::map_dfr(~{
+    purrr::map_dfr(purrr::possibly(~{
       res2 <- httr::GET("http://www.stj.jus.br",
                         path = "/SCON/jurisprudencia/toc.jsp",
                         query = list(tipo_visualizacao = "",
@@ -123,21 +123,21 @@ livre <-  abjutils::rm_accent(livre) %>%
         xml2::xml_text(trim = TRUE)
 
       relator <- principal %>%
-        xml2::xml_find_all("//div/h4[text()='Relator(a)']/following-sibling::pre[@class='docTexto']") %>%
+        xml2::xml_find_all("//div[text()='Relator(a)']/following-sibling::div[@class='docTexto']") %>%
         xml2::xml_text() %>%
         stringr::str_extract("(?<=Ministr[ao]\\s).*(?=\\s\\()")
 
       orgao_julgador <- principal %>%
-        xml2::xml_find_all("//div/h4[text()='\u00D3rg\u00E3o Julgador']/following-sibling::pre[@class='docTexto']") %>%
+        xml2::xml_find_all("//div[text()='\u00D3rg\u00E3o Julgador']/following-sibling::div[@class='docTexto']") %>%
         xml2::xml_text()
 
       data_julgamento <- principal %>%
-        xml2::xml_find_all("//div/h4[text()='Data do Julgamento']/following-sibling::pre[@class='docTexto']") %>%
+        xml2::xml_find_all("//div[text()='Data do Julgamento']/following-sibling::div[@class='docTexto']") %>%
         xml2::xml_text() %>%
         lubridate::dmy()
 
       publicacao <- principal %>%
-        xml2::xml_find_all("//div/h4[text()='Data da Publica\u00E7\u00E3o/Fonte']/following-sibling::pre[@class='docTexto']") %>%
+        xml2::xml_find_all("//div[text()='Data da Publica\u00E7\u00E3o/Fonte']/following-sibling::div[@class='docTexto']") %>%
         xml2::xml_text()
 
       fonte <- publicacao %>% stringr::str_extract("\\w+")
@@ -145,15 +145,15 @@ livre <-  abjutils::rm_accent(livre) %>%
       data_publicacao <- pt_time_extract(publicacao)
 
       ementa <- principal %>%
-        xml2::xml_find_all("//div/h4[text()='Ementa']/following-sibling::pre[@class='docTexto']") %>%
-        xml2::xml_text()
+        xml2::xml_find_all("//div[text()='Ementa']/following-sibling::div[@class='docTexto']") %>%
+        xml2::xml_text(trim = TRUE)
 
       decisao <- principal %>%
-        xml2::xml_find_all("//div/h4[text()='Ac\u00F3rd\u00E3o']/following-sibling::pre[@class='docTexto']") %>%
+        xml2::xml_find_all("//div[text()='Ac\u00F3rd\u00E3o']/following-sibling::div[@class='docTexto']") %>%
         xml2::xml_text()
 
       tibble::tibble(page,processo,origem,classe,registro_stj,relator,orgao_julgador,data_julgamento,fonte,data_publicacao,ementa,decisao)
-    })
+    },NULL))
 
   df<-dplyr::bind_cols(search_time=rep(search_time,nrow(df)),df)
 }

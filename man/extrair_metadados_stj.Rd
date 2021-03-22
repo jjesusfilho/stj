@@ -4,8 +4,12 @@
 \alias{extrair_metadados_stj}
 \title{Extrair metadados da jurisprudência do STJ}
 \usage{
-extrair_metadados_stj(livre = "", aspas = FALSE, data_inicial = "",
-  data_final = "")
+extrair_metadados_stj(
+  livre = "",
+  aspas = FALSE,
+  data_inicial = "",
+  data_final = ""
+)
 }
 \arguments{
 \item{livre}{Se deixar em branco, informe as datas.}
