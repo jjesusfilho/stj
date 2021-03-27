@@ -49,6 +49,17 @@ stj_baixar_cjsg  <- function(livre = "",
     livre <- deparse(livre)
   }
 
+  if (data_inicial == "" & data_final == ""){
+
+    dt <- ""
+
+    df <- ""
+    data <- ""
+
+  } else {
+
+
+
   dt <- lubridate::dmy(data_inicial) %>%
     stringr::str_remove_all("\\D+")
 
@@ -56,7 +67,7 @@ stj_baixar_cjsg  <- function(livre = "",
     stringr::str_remove_all("\\D+")
 
   data <- glue::glue("@DTPB >= {dt} E @DTPB <= {df}")
-
+}
 
 
   #open_search <- utils::URLencode(open_search)
