@@ -18,13 +18,13 @@
 #' }
 baixar_processo_stj <- function(numero = NULL, diretorio = ".",documentos = FALSE) {
 
-httr::set_config(httr::config(ssl_verifypeer = FALSE))
+  httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
   if (stringr::str_remove_all(numero[1],"\\D+") %>% nchar() == 20) {
 
     numero <- purrr::map(numero,~stringr::str_remove_all(.x,"\\D+")) %>%
-          unlist() %>%
-            abjutils::build_id()
+      unlist() %>%
+      abjutils::build_id()
 
     body <-
       list(
@@ -105,67 +105,68 @@ httr::set_config(httr::config(ssl_verifypeer = FALSE))
       )
 
 
-      }
+  }
 
 
-  url <- "https://ww2.stj.jus.br/processo/pesquisa/"
+  url <- "https://processo.stj.jus.br/processo/pesquisa/"
 
 
   ## Esse pedido é só para iniciar a sessão
-  s <- "https://scon.stj.jus.br/SCON/index.jsp?novaPesquisa" %>%
-    httr::GET()
+  # s <- "https://scon.stj.jus.br/SCON/index.jsp?novaPesquisa" %>%
+  #   httr::GET()
 
   ## Essa url servirá como referer
-  url2 <- "https://ww2.stj.jus.br/processo/pesquisa/?aplicacao=processos.ea"
+  url2 <- "https://processo.stj.jus.br/processo/pesquisa/?aplicacao=processos.ea"
 
   purrr::walk(numero, purrr::possibly(~{
 
     if (stringr::str_remove_all(.x,"\\D+") %>% nchar() == 20){
-    body$numeroUnico <- .x
-    tipo <- "_processo_stj_"
+      body$numeroUnico <- .x
+      tipo <- "_processo_stj_"
     } else {
-     body$num_registro <- .x
-  tipo <- "_registro_stj_"
-   }
+      body$num_registro <- .x
+      tipo <- "_registro_stj_"
+    }
     arquivo <- paste0(tipo,stringr::str_replace_all(.x,"\\D","_"), ".html")
 
-  resposta<-  httr::RETRY("POST", url = url, body = body,  encode="form",
-                httr::add_headers(`Referer` = url2),
-                httr::timeout(30))
+    resposta<-  httr::RETRY("POST", url = url, body = body,  encode="form",
+                            httr::add_headers(`Referer` = url2),
+                            httr::timeout(30))
 
-  ## Segue adiante apenas se o html não estiver vazio,
-  ## ou seja, se o processo realmente existir:
- if(resposta$content %>% object.size() > 395000){
+    ## Segue adiante apenas se o html não estiver vazio,
+    ## ou seja, se o processo realmente existir:
+    if(resposta$content %>% object.size() > 250000){
 
-   resposta$content %>%
-     writeBin(file.path(diretorio, Sys.time() %>%
-                                             stringr::str_replace_all("\\D+", "_") %>%
-                                             stringr::str_replace("$", arquivo)))
-  if (documentos == TRUE) {
+      resposta$content %>%
+        writeBin(file.path(diretorio, Sys.time() %>%
+                             stringr::str_replace_all("\\D+", "_") %>%
+                             stringr::str_replace("$", arquivo)))
 
-  sequencial<-  resposta %>%
-      httr::content() %>%
-     xml2::xml_find_all("//*[contains(@onclick,'sequencial')]") %>%
-    xml2::xml_attr("onclick") %>%
-    stringr::str_extract("(?<=sequencial=)\\d+") %>%
-    unique()
+      if (documentos == TRUE) {
 
-  url <- paste0("https://ww2.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ATC?seq=",sequencial,"&tipo=0&nreg=&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=&formato=HTML&salvar=false")
+        sequencial<-  resposta %>%
+          httr::content() %>%
+          xml2::xml_find_all("//*[contains(@onclick,'sequencial')]") %>%
+          xml2::xml_attr("onclick") %>%
+          stringr::str_extract("(?<=sequencial=)\\d+") %>%
+          unique()
 
-  purrr::walk2(url,sequencial,purrr::possibly(~{
+        url <- paste0("https://processo.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ATC?seq=",sequencial,"&tipo=0&nreg=&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=&formato=HTML&salvar=false")
 
-    arquivo <- paste0("_documento_",.y,tipo,numero,".html") %>%
-      stringr::str_replace_all("\\W(?!html)","_")
+        purrr::walk2(url,sequencial,purrr::possibly(~{
 
-  httr::RETRY("GET", url = .x, httr::timeout(30),
-              httr::write_disk(file.path(diretorio, Sys.time() %>%
-                                           stringr::str_replace_all("\\D", "_") %>%
-                                           stringr::str_replace("$", arquivo))))
+          arquivo <- paste0("_documento_",.y,tipo,numero,".html") %>%
+            stringr::str_replace_all("\\W(?!html)","_")
 
-  },NULL))
+          httr::RETRY("GET", url = .x, httr::timeout(30),
+                      httr::write_disk(file.path(diretorio, Sys.time() %>%
+                                                   stringr::str_replace_all("\\D", "_") %>%
+                                                   stringr::str_replace("$", arquivo))))
 
-}
-  }
+        },NULL))
+
+      }
+    }
 
   },NULL))
 

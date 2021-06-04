@@ -17,7 +17,7 @@ baixar_documento_stj <- function(sequencial,  diretorio = ".", formato=c("PDF","
   formato <- toupper(formato) %>%
              `[`(1)
 
-  url<-paste0("https://ww2.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ATC?seq=",sequencial,"&tipo=0&nreg=&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=&formato=",formato,"&salvar=false")
+  url<-paste0("https://processo.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ATC?seq=",sequencial,"&tipo=0&nreg=&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=&formato=",formato,"&salvar=false")
 
 
 
