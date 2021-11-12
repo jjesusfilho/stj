@@ -18,7 +18,7 @@ Tribunal de Justiça
 Você pode instalar a versão em desenvolvimento com:
 
 ``` r
-remotes::install_github("stj")
+remotes::install_github("jjesusfilho/stj")
 ```
 
 ## Como usar
