@@ -2,7 +2,7 @@
 % Please edit documentation in R/stj_baixar_documentos_pdf.R
 \name{stj_baixar_documentos_pdf}
 \alias{stj_baixar_documentos_pdf}
-\title{Baixa documents a partir do tibble criado com ler_metacods_stj}
+\title{Baixa documents a partir do tibble criado com ler_metadocs_stj}
 \usage{
 stj_baixar_documentos_pdf(df, diretorio = ".")
 }
@@ -15,5 +15,5 @@ stj_baixar_documentos_pdf(df, diretorio = ".")
 pdfs
 }
 \description{
-Baixa documents a partir do tibble criado com ler_metacods_stj
+Baixa documents a partir do tibble criado com ler_metadocs_stj
 }

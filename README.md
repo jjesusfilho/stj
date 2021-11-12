@@ -5,12 +5,9 @@
 
 <!-- badges: start -->
 
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/jjesusfilho/stj?branch=master&svg=true)](https://ci.appveyor.com/project/jjesusfilho/stj)
-[![Travis build
-status](https://travis-ci.org/jjesusfilho/stj.svg?branch=master)](https://travis-ci.org/jjesusfilho/stj)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![R-CMD-check](https://github.com/jjesusfilho/stj/workflows/R-CMD-check/badge.svg)](https://github.com/jjesusfilho/stj/actions)
 <!-- badges: end -->
 
 O objetivo do pacote stj é baixar e organizar decisões do Superior
@@ -21,7 +18,7 @@ Tribunal de Justiça
 Você pode instalar a versão em desenvolvimento com:
 
 ``` r
-devtools::install_github("stj")
+remotes::install_github("stj")
 ```
 
 ## Como usar
@@ -73,7 +70,7 @@ dos processos individualmente considerados:
 
 ``` r
 dir.create("processos")
-baixar_processo_stj(jurisprudencia$registro_stj, diretorio = "processos")
+stj_baixar_processo(jurisprudencia$registro_stj, diretorio = "processos")
 ```
 
 Você pode usar usar tanto o número do registro, quanto o número do CNJ,
@@ -86,19 +83,19 @@ não avaliei se vale a pena incluir a opção de pdf. Os nomes dos
 documentos terão a palavra documento, seguido do código sequencial:
 
 ``` r
-baixar_processo_stj(df$registro_stj, diretorio = "processos", documentos = TRUE)
+stj_baixar_processo(df$registro_stj, diretorio = "processos", documentos = TRUE)
 ```
 
 Depois de baixados, você pode ler os detalhes:
 
 ``` r
-detalhes <- ler_detalhes_stj(diretorio = "processos")
+detalhes <- stj_ler_detalhes(diretorio = "processos")
 ```
 
 Em seguida, ler o andamento processual:
 
 ``` r
-fases <- ler_fases_stj(diretorio = "processos")
+fases <- stj_ler_fases(diretorio = "processos")
 ```
 
 Caso você queira saber ao que corresponde cada um dos documentos, use a
@@ -119,7 +116,7 @@ baixar_documento_stj(metadocs$sequencial,diretorio = "documentos", formato="pdf"
 Em seguida, você pode ler tais documentos
 
 ``` r
-docs <- ler_documento_stj(diretorio = "documentos")
+docs <- stj_ler_documentos(diretorio = "documentos")
 ```
 
 ## Código de conduta

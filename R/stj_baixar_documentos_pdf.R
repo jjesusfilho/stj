@@ -1,4 +1,4 @@
-#' Baixa documents a partir do tibble criado com ler_metacods_stj
+#' Baixa documents a partir do tibble criado com ler_metadocs_stj
 #'
 #' @param df Tibble
 #' @param diretorio Diretório onde armazenar os arquivos
@@ -10,7 +10,7 @@ stj_baixar_documentos_pdf <- function(df, diretorio = "."){
 
 df <- stats::na.omit(df)
 
-pb <- progress::progress_bar$new(length = nrow(df))
+pb <- progress::progress_bar$new(total = nrow(df))
 
 purrr::pwalk(df, purrr::possibly(function(sequencial, registro, peticao_numero, data_publicacao,...){
 
