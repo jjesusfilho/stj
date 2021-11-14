@@ -32,7 +32,8 @@ stj_ler_fases_classe <- function( arquivos = NULL, diretorio = "."){
     resposta <- xml2::read_html(.x)
 
     data_hora <-xml2::xml_find_all(resposta,"//*[@class='clsFaseDataHora']") %>%
-      xml2::xml_text()
+      xml2::xml_text() |>
+      lubridate::parse_date_time("dmYHM", tz = "America/Sao_Paulo")
 
     fase <-xml2::xml_find_all(resposta,"//*[@class='classSpanFaseTexto']|//*[@class='classSpanFaseTexto clssSpanFaseTextoComLink']") %>%
       xml2::xml_text(trim=T)
