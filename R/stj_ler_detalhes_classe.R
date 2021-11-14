@@ -1,8 +1,8 @@
-#' Ler detalhes dos processos do STJ
+#' Ler detalhes dos processos do STJ baixados com stj_baixar_classe_processo
 #'
-#' @param diretorio Diretório se arquivos não forem informados
 #' @param arquivos Se os caminhos para os arquivos forem fornecidos
 #'     o diretório é ignorado.
+#' @param diretorio Diretório se arquivos não forem informados
 #' @param wide Colocar no formato largo? Padrão é longo.
 #'
 #' @return tibble com detalhes do processo
@@ -10,9 +10,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' df <- ler_detalhes_stj(diretorio = ".")
+#' df <- stj_ler_detalhes_classe(diretorio = ".")
 #' }
-stj_ler_detalhes <- function(diretorio = ".", arquivos = NULL, wide = FALSE){
+stj_ler_detalhes_classe <- function(arquivos = NULL, diretorio = ".", wide = FALSE){
 
   if (is.null(arquivos)){
 
@@ -26,7 +26,7 @@ stj_ler_detalhes <- function(diretorio = ".", arquivos = NULL, wide = FALSE){
 
   pb <- progress::progress_bar$new(total = length(arquivos))
 
- dados <-  purrr::map_dfr(arquivos,  purrr::possibly(~{
+  dados <-  purrr::map_dfr(arquivos,  purrr::possibly(~{
 
     pb$tick()
 
@@ -53,12 +53,12 @@ stj_ler_detalhes <- function(diretorio = ".", arquivos = NULL, wide = FALSE){
 
   },NULL))
 
- if (wide == TRUE) {
-   dados <- dados %>% dplyr::group_by_at(dplyr::vars(-valor)) %>%
-     dplyr::mutate(row_id = 1:dplyr::n()) %>% dplyr::ungroup() %>%
-     tidyr::spread(key = variavel, value = valor) %>%
-     dplyr::select(-row_id)
- }
+  if (wide == TRUE) {
+    dados <- dados %>% dplyr::group_by_at(dplyr::vars(-valor)) %>%
+      dplyr::mutate(row_id = 1:dplyr::n()) %>% dplyr::ungroup() %>%
+      tidyr::spread(key = variavel, value = valor) %>%
+      dplyr::select(-row_id)
+  }
 
- return(dados)
+  return(dados)
 }
