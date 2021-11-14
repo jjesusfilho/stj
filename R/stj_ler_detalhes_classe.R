@@ -18,7 +18,7 @@ stj_ler_detalhes_classe <- function(arquivos = NULL, diretorio = ".", wide = FAL
 
     arquivos <- list.files(
       path = diretorio,
-      pattern = "_\\d{2}_(processo|registro)",
+      pattern = "classe",
       full.names = T
     )
 
@@ -30,8 +30,10 @@ stj_ler_detalhes_classe <- function(arquivos = NULL, diretorio = ".", wide = FAL
 
     pb$tick()
 
-    numero <- stringr::str_extract(.x,"(?<=stj_).+?(?=.html)") %>%
-      stringr::str_remove_all("\\D+")
+
+    classe <- stringr::str_extract(.x, "(?<=classe_)[a-z]+")
+    numero <- stringr::str_extract(.x, "(?<=numero_)\\d+")
+
 
     resposta <- xml2::read_html(.x)
 
@@ -48,7 +50,7 @@ stj_ler_detalhes_classe <- function(arquivos = NULL, diretorio = ".", wide = FAL
     valor <- xml2::xml_find_all(resposta,"//*[@class='classSpanDetalhesTexto']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble(numero = numero, registro = registro,  variavel = variavel, valor = valor) %>%
+    tibble::tibble(classe, numero = numero, registro = registro,  variavel = variavel, valor = valor) %>%
       tidyr::fill(variavel)
 
   },NULL))
