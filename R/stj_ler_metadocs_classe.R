@@ -49,7 +49,7 @@ stj_ler_metadocs_classe <- function(arquivos = NULL, diretorio = "."){
       xml2::xml_attr("onclick") %>%
       stringr::str_extract("(?<=publicacao_data=)\\d+")
 
-    tibble::tibble(classe, numero,,nome, sequencial,peticao_numero, data_publicacao) %>%
+    tibble::tibble(classe, numero,nome, sequencial,peticao_numero, data_publicacao) %>%
       dplyr::distinct()
 
   },NULL))
