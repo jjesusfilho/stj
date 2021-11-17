@@ -24,7 +24,7 @@ stj_classificar_writ <- function(x, preprocessado = TRUE){
     stringr::str_detect(x, "(?=.*\\bneg[oa]\\w*\\b)(?=.*\\bprejudicado\\b)") ~ "duvida",
     stringr::str_detect(x, "(?=.*\\bacolh\\w+\\b)(?=.*\\bneg[ao]\\w*\\b)") ~ "duvida",
     re2::re2_detect(x, "expeco a ordem") ~ "concedido",
-    re2::re2_detect(x,"de oficio") ~ "de oficio",
+    re2::re2_detect(x,"\\boff?icio") ~ "de oficio",
     re2::re2_detect(x,"nao concedo") ~ "denegado",
     re2::re2_detect(x, "concedo")  ~ "concedido",
     re2::re2_detect(x, "\\bdefiro")  ~ "deferido",
