@@ -13,11 +13,12 @@ Encoding: UTF-8
 Language: pt_BR
 LazyData: true
 Suggests: 
-    roxygen2 (>= 6.1.1)
+    curl,
+    roxygen2 (>= 6.1.1),
+    stringi
 Imports: 
     rlang (>= 0.1.2),
     magrittr (>= 1.5),
-    stringi,
     stringr,
     purrr,
     dplyr,
