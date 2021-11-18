@@ -16,7 +16,7 @@
 stj_baixar_docs_pdf <- function(sequencial, registro, data, diretorio  = "."){
 
   registro <- registro |>
-    stringr::str_remove("\\D")
+    stringr::str_remove_all("\\D")
 
   data <- data |>
     lubridate::dmy() %>%
@@ -25,11 +25,43 @@ stj_baixar_docs_pdf <- function(sequencial, registro, data, diretorio  = "."){
 
   purrr::pwalk(list(x = sequencial, y = registro, z = data), purrr::possibly(function(x,y,z) {
 
-    u <- paste0("https://www.stj.jus.br/websecstj/cgi/revista/REJ.cgi/MON?seq=",x,"&tipo=0&nreg=",y,"&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=", z, "&formato=PDF&salvar=false")
+    u1 <- paste0("https://www.stj.jus.br/websecstj/cgi/revista/REJ.cgi/MON?seq=",x,"&tipo=0&nreg=",y,"&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=", z, "&formato=PDF&salvar=false")
+    u2 <- paste0("https://processo.stj.jus.br/processo/dj/documento/?&sequencial=", x,"&num_registro=",y,"&data=",z, "&formato=PDF&componente=MON")
+
+    r1 <- httr::GET(u1)
+    r2 <- httr::GET(u2)
+
+    rs <- list(r1, r2)
+
+    tipo1 <- r1$headers$`content-type`
+    tipo2 <- r2$headers$`content-type`
+
+    pdf <- "application/pdf"
+
+    pdfs <- is.element(c(tipo1, tipo2), pdf)
+
+    tamanho1 <- r1$headers$`content-length`
+    tamanho2 <- r2$headers$`content-length`
+
+
+
+
+    if (all(pdfs)){
+
+    r <-   rs[which.max(c(tamanho1, tamanho2))][[1]]
+
+    } else {
+
+    r <- rs[which(pdfs)][[1]]
+
+    }
+
+
+
 
     arquivo <- file.path(diretorio, paste0("stj_doc_sequencial_",x, "_registro_", y, "_data_", z,".pdf"))
 
-    httr::GET(u, httr::write_disk(arquivo, overwrite = TRUE))
+    writeBin(r$content, arquivo)
 
 
   },NULL))
