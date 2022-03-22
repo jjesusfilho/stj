@@ -44,10 +44,9 @@ stj_ler_metadocs_classe <- function(arquivos = NULL, diretorio = "."){
       xml2::xml_attr("onclick") %>%
       stringr::str_extract("(?<=peticao_numero=)\\d+")
 
-    data_publicacao <-
-      xml2::xml_find_all(x,"//*[contains(@onclick,'sequencial')]") %>%
-      xml2::xml_attr("onclick") %>%
-      stringr::str_extract("(?<=publicacao_data=)\\d+")
+    data_publicacao <- nome |>
+      stringr::str_extract("\\d{2}/\\d{2}/\\d+") |>
+      lubridate::dmy()
 
     tibble::tibble(classe, numero,nome, sequencial,peticao_numero, data_publicacao) %>%
       dplyr::distinct()

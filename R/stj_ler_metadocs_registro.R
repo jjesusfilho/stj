@@ -12,7 +12,7 @@
 #' \dontrun{
 #' stj_ler_metadocs(diretorio=".")
 #' }
-stj_ler_metadocs <- function(arquivos = NULL, diretorio = "."){
+stj_ler_metadocs_registro <- function(arquivos = NULL, diretorio = "."){
 
   if (is.null(arquivos)){
 
@@ -42,13 +42,23 @@ stj_ler_metadocs <- function(arquivos = NULL, diretorio = "."){
       xml2::xml_attr("onclick") %>%
       stringr::str_extract("(?<=peticao_numero=)\\d+")
 
-     data_publicacao <-
-      xml2::xml_find_all(x,"//*[contains(@onclick,'sequencial')]") %>%
-      xml2::xml_attr("onclick") %>%
-      stringr::str_extract("(?<=publicacao_data=)\\d+")
+     data_publicacao <- nome |>
+          stringr::str_extract("\\d{2}/\\d{2}/\\d+") |>
+          lubridate::dmy()
 
-    tibble::tibble(registro,nome, sequencial,peticao_numero, data_publicacao) %>%
-      dplyr::distinct()
+     classe_numero <- nome |>
+         stringr::str_extract("\\w+\\s+\\d+(?=\\()") |>
+         stringr::str_squish()
+
+     classe <- classe_numero |>
+               stringr::str_extract("^\\D+")
+
+     numero <- classe_numero |>
+           stringr::str_extract("\\d+")
+
+    tibble::tibble(registro,classe, numero,nome, sequencial,peticao_numero, data_publicacao) %>%
+      dplyr::distinct() |>
+      tidyr::fill(data_publicacao, .direction = "down")
 
   },NULL))
 }
