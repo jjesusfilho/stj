@@ -24,7 +24,7 @@ stj_baixar_intimacoes <- function(usuario = NULL, senha = NULL, diretorio = ".")
     }
   }
 
-  url1 <- "https://www.stj.jus.br/portalIntimacao"
+  url1 <- "https://www.stj.jus.br/portalIntimacao/public/login.xhtml"
 
   viewid <- url1 |>
     httr::GET() |>
