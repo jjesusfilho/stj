@@ -23,27 +23,26 @@ stj_ler_fases <- function(diretorio = ".", arquivos = NULL){
 
   }
 
-  processos <- stringr::str_extract(arquivos,"(?<=stj_).+?(?=.html)") %>%
-    stringr::str_replace("_","/")
+  pb <- progress::progress_bar$new(total = length(arquivos))
 
-  purrr::map2_dfr(arquivos, processos,  purrr::possibly(~{
+  purrr::map_dfr(arquivos,purrr::possibly(~{
+
+    pb$tick()
+
+    registro <- stringr::str_extract(.x,"(?<=stj_).+?(?=.html)") |>
+               stringr::str_remove_all("\\D+")
 
     resposta <- xml2::read_html(.x)
 
-    datahora <-xml2::xml_find_all(resposta,"//*[@class='clsFaseDataHora']") %>%
-      xml2::xml_text()
-
-    data <- stringr::str_sub(datahora,1,10) %>%
-      lubridate::dmy()
-
-    hora <- stringr::str_sub(datahora,11)
+    data <-xml2::xml_find_all(resposta,"//*[@class='clsFaseDataHora']") %>%
+      xml2::xml_text() |>
+      lubridate::dmy_hm(tz = "America/Sao_Paulo")
 
     fase <-xml2::xml_find_all(resposta,"//*[@class='classSpanFaseTexto']|//*[@class='classSpanFaseTexto clssSpanFaseTextoComLink']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble (registro_stj = .y,  data, hora, fase)
+    tibble::tibble (registro_stj = registro,  data,  fase)
 
-  },NULL)) %>%
-    dplyr::mutate(hora = lubridate::hm(hora)) # não sei porque, mas só funciona com mutate
+  },NULL))
 
 }

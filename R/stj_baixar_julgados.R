@@ -21,20 +21,13 @@ stj_baixar_julgados <- function(livre = "", operador = "e", aspas = FALSE, repo 
 
   livre<-  abjutils::rm_accent(livre)
 
-  if (aspas == TRUE) {
-    livre <- deparse(livre)
-  }
-
-  if (operador != "e" & operador != "adj"){
-    stop("Informar se o operador \u00e9 'e' ou 'adj'")
-  }
 
   repo <- repo %>%
     `[`(1) %>%
     toupper()
 
-  url1 <- "http://www.stj.jus.br/SCON/"
-  url2 <- "http://www.stj.jus.br/SCON/pesquisar.jsp"
+  url1 <- "https://scon.stj.jus.br/SCON"
+  url2 <- "https://scon.stj.jus.br/SCON/pesquisar.jsp"
 
 
   h <- httr::GET(url1)
@@ -42,47 +35,58 @@ stj_baixar_julgados <- function(livre = "", operador = "e", aspas = FALSE, repo 
 
   ####corpo_fim####
 
-  inicial<- data_inicial %>%
-         lubridate::dmy() %>%
+  inicial<- data_inicial |>
+         lubridate::dmy() |>
          format("%Y%m%d")
 
-  final<- data_final %>%
-    lubridate::dmy() %>%
+  final<- data_final |>
+    lubridate::dmy() |>
     format("%Y%m%d")
 
  data<- paste0("@DTDE >= ",inicial," e @DTDE <= ",final)
 
-  content<-httr::GET("http://www.stj.jus.br",
-                     path = "/SCON/jurisprudencia/pesquisaAjax.jsp",
-                     query = list(tipo_visualizacao = "",
-                                  novaConsulta = TRUE,
-                                  acao ="pesquisar",
-                                  data = data,
-                                  livre = livre,
-                                  b = repo,
-                                  operador = operador,
-                                  opAjuda = "SIM",
-                                  p = FALSE,
-                                 # l = 10,
-                                #  t = 'JURIDICO',
-                                  tipo_data= "DTDE",
-                                  data_inicial =data_inicial,
-                                  data_final =data_final,
-                                  i = 1),
-                     httr::add_headers(`Referer` = url2))%>%
-    httr::content()
+ r2 <- httr::POST(url2, body = body, encode = "form",
+                  httr::write_disk("data-raw/r1.html", overwrite = T))
+
+ body <- list(
+   pesquisaAmigavel = "",
+   acao = "pesquisar",
+   novaConsulta = "true",
+   i = "1",
+   b = repo,
+   livre = livre,
+   filtroPorOrgao = "",
+   filtroPorMinistro = "",
+   filtroPorNota = "",
+   data = data,
+   operador = "e",
+   thesaurus = "JURIDICO",
+   p = "true",
+   tp = "T",
+   processo = "",
+   classe = "",
+   uf = "",
+   relator = "",
+   dtpb = "",
+   dtpb1 = "",
+   dtpb2 = "",
+   dtde = data,
+   dtde1 = data_inicial,
+   dtde2 = data_final,
+   orgao = "",
+   ementa = "",
+   nota = "",
+   ref = ""
+ )
 
 
-  ## Get the number of pages to loop over each one and add them to the data.frame
-  # pages <- content %>%
-  #   xml2::xml_find_first(xpath = '//div[@id="infopesquisa"]/span[@class="labellinha"]/following-sibling::span[1]') %>%
-  #   xml2::xml_text() %>%
-  #   as.numeric()
 
-  paginas<- content %>%
-    xml2::xml_find_first("//span[@class='labellinha']/following-sibling::span") %>%
-    xml2::xml_text() %>%
-    stringr::str_extract("\\d+") %>%
+
+
+  paginas<- content |>
+    xml2::xml_find_first("//span[@class='numDocs']") |>
+    xml2::xml_text() |>
+    stringr::str_extract("\\d+") |>
     as.numeric()
 
 
@@ -97,25 +101,31 @@ pb <- progress::progress_bar$new(total = length(sequencia))
 
     pb$tick()
 
-    arquivo<-paste0("_pagina_",.x,".html")
-    httr::GET("http://www.stj.jus.br",
-                      path = "/SCON/jurisprudencia/toc.jsp",
-                      query = list(tipo_visualizacao = "",
-                                   data= data,
-                                   livre = livre,
-                                   b = repo,
-                                   operador = operador,
-                                   p = "true",
-                                   l = 10,
-                                   t = 'JURIDICO',
-                                   tipo_data= "DTDE",
-                                   data_inicial =data_inicial,
-                                   data_final =data_final,
-                                   i = .x),
-                      httr::add_headers(`Referer` = url2),
-                      httr::write_disk(file.path(diretorio, Sys.time() %>%
-                                                   stringr::str_replace_all("\\D+", "_") %>%
-                                                   stringr::str_replace("$", arquivo))))
+
+   arquivo <-  file.path(diretorio, Sys.time() |>
+                stringr::str_replace_all("\\D+", "_") |>
+                stringr::str_replace("$", paste0("_pagina_",.x,".html")))
+
+
+   body <- list(
+     numDocsPagina = "10",
+     tipo_visualizacao = "",
+     filtroPorNota = "",
+     ref = "",
+     data = data,
+     p = "true",
+     b = repo,
+     pesquisaAmigavel = "",
+     thesaurus = "JURIDICO",
+     i = .x,
+     l = "10",
+     tp = "T",
+     operador = "e",
+     livre = livre
+   )
+
+   httr::POST(url2, body = body, encode = "form", httr::write_disk(arquivo))
+
 
   },NULL))
 
