@@ -32,7 +32,7 @@ o próprio inteiro teor da decisão monocrática.
 ``` r
 dir.create("jurisprudencia")
 
-stj_baixar_cjsg(
+stj_baixar_julgados(
 livre = "homicídio",
 data_inicial = "01/01/2018",
 data_final = "31/12/2018"
@@ -46,7 +46,7 @@ diretorio = "jurisprudencia"
 ``` r
 dir.create("monocraticas")
 
-stj_baixar_cjsg(
+stj_baixar_julgados(
 livre = "homicídio",
 data_inicial = "01/01/2018",
 data_final = "31/12/2018"
