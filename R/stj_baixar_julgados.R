@@ -1,4 +1,4 @@
-#' Baixar decisões do STJ
+#' Esta função está sob manutenção
 #'
 #' @param livre campo livre
 #' @param operador "e" ou "adj", padrão para "e"
@@ -22,8 +22,8 @@ stj_baixar_julgados <- function(livre = "", operador = "e", aspas = FALSE, repo 
   livre<-  abjutils::rm_accent(livre)
 
 
-  repo <- repo %>%
-    `[`(1) %>%
+  repo <- repo |>
+    purrr::pluck(1) |>
     toupper()
 
   url1 <- "https://scon.stj.jus.br/SCON"
@@ -39,17 +39,24 @@ stj_baixar_julgados <- function(livre = "", operador = "e", aspas = FALSE, repo 
          lubridate::dmy() |>
          format("%Y%m%d")
 
+  if (is.na(inicial)) inicial <- ""
+
   final<- data_final |>
     lubridate::dmy() |>
     format("%Y%m%d")
 
+  if (is.na(final)) final <- ""
+
+
  data<- paste0("@DTDE >= ",inicial," e @DTDE <= ",final)
+
+ if (final == "" & inicial == "") data <- ""
 
  r2 <- httr::POST(url2, body = body, encode = "form",
                   httr::write_disk("data-raw/r1.html", overwrite = T))
 
  body <- list(
-   pesquisaAmigavel = "",
+   pesquisaAmigavel = "+<b>homicidio</b>",
    acao = "pesquisar",
    novaConsulta = "true",
    i = "1",
@@ -59,7 +66,7 @@ stj_baixar_julgados <- function(livre = "", operador = "e", aspas = FALSE, repo 
    filtroPorMinistro = "",
    filtroPorNota = "",
    data = data,
-   operador = "e",
+   operador = operador,
    thesaurus = "JURIDICO",
    p = "true",
    tp = "T",
@@ -79,6 +86,10 @@ stj_baixar_julgados <- function(livre = "", operador = "e", aspas = FALSE, repo 
    ref = ""
  )
 
+ r2 <- httr::POST(url2, body = body, encode = "form",
+                  httr::accept("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"),
+                  httr::content_type("application/x-www-form-urlencoded"),
+                  httr::user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0"))
 
 
 
