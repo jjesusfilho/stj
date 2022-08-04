@@ -2,7 +2,7 @@
 % Please edit documentation in R/stj_listar_decisoes.R
 \name{stj_listar_decisoes}
 \alias{stj_listar_decisoes}
-\title{Lê urls da aba decisões}
+\title{Lê urls da aba decisões baixada com stj_baixar_processo}
 \usage{
 stj_listar_decisoes(arquivos = NULL, diretorio = ".")
 }
@@ -15,5 +15,5 @@ stj_listar_decisoes(arquivos = NULL, diretorio = ".")
 tibble
 }
 \description{
-Lê urls da aba decisões
+Lê urls da aba decisões baixada com stj_baixar_processo
 }

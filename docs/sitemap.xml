@@ -115,6 +115,9 @@
     <loc>/reference/stj_baixar_classe_processo.html</loc>
   </url>
   <url>
+    <loc>/reference/stj_baixar_decisoes.html</loc>
+  </url>
+  <url>
     <loc>/reference/stj_baixar_docs_pdf.html</loc>
   </url>
   <url>
@@ -151,6 +154,9 @@
     <loc>/reference/stj_extrair_metadados.html</loc>
   </url>
   <url>
+    <loc>/reference/stj_extrair_papel.html</loc>
+  </url>
+  <url>
     <loc>/reference/stj_extrair_partes_detalhes.html</loc>
   </url>
   <url>
@@ -158,6 +164,9 @@
   </url>
   <url>
     <loc>/reference/stj_ler_cjsg_mono.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stj_ler_decisoes.html</loc>
   </url>
   <url>
     <loc>/reference/stj_ler_detalhes.html</loc>
@@ -191,6 +200,9 @@
   </url>
   <url>
     <loc>/reference/stj_ler_por_publicacao.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stj_listar_decisoes.html</loc>
   </url>
   <url>
     <loc>/reference/stj_organizar.html</loc>

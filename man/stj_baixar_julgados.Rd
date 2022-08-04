@@ -2,7 +2,7 @@
 % Please edit documentation in R/stj_baixar_julgados.R
 \name{stj_baixar_julgados}
 \alias{stj_baixar_julgados}
-\title{Baixar decisões do STJ}
+\title{Esta função está sob manutenção}
 \usage{
 stj_baixar_julgados(
   livre = "",
@@ -33,7 +33,7 @@ stj_baixar_julgados(
 htmls
 }
 \description{
-Baixar decisões do STJ
+Esta função está sob manutenção
 }
 \examples{
 \dontrun{

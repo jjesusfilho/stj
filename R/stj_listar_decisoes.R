@@ -1,4 +1,4 @@
-#' Lê urls da aba decisões
+#' Lê urls da aba decisões baixada com stj_baixar_processo
 #'
 #' @param arquivos Vetor de arquivos.
 #' @param diretorio Informar diretório se não informar arquivos.
@@ -30,13 +30,11 @@ stj_listar_decisoes <- function(arquivos = NULL, diretorio = "."){
       xml2::url_absolute("https://processo.stj.jus.br")
 
     fonte <- stringr::str_extract(urls, "(?<=processo/)\\w+")
-
     componente <- stringr::str_extract(urls, "(?<=componente=)\\w+")
-
+    tipo_documento <- stringr::str_extract(urls,"(?<=tipo_documento=)\\w+")
+    peticao_numero <- stringr::str_extract(urls, "(?<=peticao_numero=)\\d+")
     sequencial <- stringr::str_extract(urls, "(?<=sequencial=)\\d+")
-
-    registro <- stringr::str_extract(urls, "(?<=num_registro=)\\d+")
-
+    registro <- stringr::str_extract(urls, "(?<=(num_registro|numero)=)\\d+")
     data <- stringr::str_extract(urls,"(?<=data=)\\d+") |>
       lubridate::ymd()
 
@@ -45,7 +43,7 @@ stj_listar_decisoes <- function(arquivos = NULL, diretorio = "."){
       xml2::xml_find_all("//div[@id='idDivDecisoes']//a[span]") |>
       xml2::xml_text()
 
-    tibble::tibble(registro, sequencial, componente, fonte, url = urls, data, texto)
+    tibble::tibble(registro, sequencial,tipo_documento, peticao_numero, componente, fonte, url = urls, data, texto)
 
 
   },NULL))
