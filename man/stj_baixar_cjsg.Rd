@@ -7,8 +7,10 @@
 stj_baixar_cjsg(
   livre = "",
   aspas = FALSE,
-  data_inicial = "",
-  data_final = "",
+  dt_ini = "",
+  dt_fim = "",
+  dt_ini_pb = "",
+  dt_fim_pb = "",
   base = "ACOR",
   n = NULL,
   diretorio = "."
@@ -19,9 +21,13 @@ stj_baixar_cjsg(
 
 \item{aspas}{Colocar entre aspas a busca}
 
-\item{data_inicial}{Data inicial da publicação no formato "dd/mm/aaaa"}
+\item{dt_ini}{Data inicial do julgamento no formato dd/mm/aaaa}
 
-\item{data_final}{Data final da publicação no formato "dd/mm/aaaa"}
+\item{dt_fim}{Data final do julgamento no formato dd/mm/aaaa}
+
+\item{dt_ini_pb}{Data inicial da publicação no formato "dd/mm/aaaa"}
+
+\item{dt_fim_pb}{Data final da publicação no formato "dd/mm/aaaa"}
 
 \item{base}{"ACOR" ou "MONO"}
 
@@ -39,8 +45,8 @@ Extrair metadados da jurisprudência do STJ
 \examples{
 \dontrun{
     stj_baixar_cjsg(
-   data_inicial = "01/07/2019",
-    data_final = "30/07/2019"
+   dt_ini = "01/07/2019",
+    dt_fim = "30/07/2019"
     )
 }
 }

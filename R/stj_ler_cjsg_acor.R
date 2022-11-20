@@ -24,50 +24,50 @@ stj_ler_cjsg_acor <- function(arquivos = NULL, diretorio =  "."){
 
     pagina <- stringr::str_extract(.x, "(?<=pagina_)\\d+")
 
-    processo <- x %>%
-      xml2::xml_find_all("//div[@class='docTexto']/text()[following-sibling::br][1]") %>%
+    processo <- x |>
+      xml2::xml_find_all("//div[@class='docTexto']/text()[following-sibling::br][1]") |>
       xml2::xml_text(trim = TRUE)
 
 
-    origem <- processo %>%
+    origem <- processo |>
       stringr::str_extract("\\w{2}$")
 
-    classe <- x %>%
-      xml2::xml_find_all("//div[@class='docTexto']/text()[following-sibling::br][2]") %>%
+    classe <- x |>
+      xml2::xml_find_all("//div[@class='docTexto']/text()[following-sibling::br][2]") |>
       xml2::xml_text(trim = TRUE)
 
-    registro_stj <- x %>%
-      xml2::xml_find_all("//div[@class='docTexto']/text()[preceding-sibling::br][2]") %>%
+    registro_stj <- x |>
+      xml2::xml_find_all("//div[@class='docTexto']/text()[preceding-sibling::br][2]") |>
       xml2::xml_text(trim = TRUE)
 
-    relator <- x %>%
-      xml2::xml_find_all("//div[text()='Relator(a)']/following-sibling::div[@class='docTexto']") %>%
-      xml2::xml_text() %>%
+    relator <- x |>
+      xml2::xml_find_all("//div[@class='docTitulo'][contains(text(),'Relator')]/following-sibling::div[@class='docTexto']") |>
+      xml2::xml_text() |>
       stringr::str_extract("(?<=Ministr[ao]\\s).*(?=\\s\\()")
 
-    orgao_julgador <- x %>%
-      xml2::xml_find_all("//div[text()='\u00D3rg\u00E3o Julgador']/following-sibling::div[@class='docTexto']") %>%
+    orgao_julgador <- x |>
+      xml2::xml_find_all("//div[text()='\u00D3rg\u00E3o Julgador']/following-sibling::div[@class='docTexto']") |>
       xml2::xml_text()
 
-    data_julgamento <- x %>%
-      xml2::xml_find_all("//div[text()='Data do Julgamento']/following-sibling::div[@class='docTexto']") %>%
-      xml2::xml_text() %>%
+    data_julgamento <- x |>
+      xml2::xml_find_all("//div[text()='Data do Julgamento']/following-sibling::div[@class='docTexto']") |>
+      xml2::xml_text() |>
       lubridate::dmy()
 
-    publicacao <- x %>%
-      xml2::xml_find_all("//div[text()='Data da Publica\u00E7\u00E3o/Fonte']/following-sibling::div[@class='docTexto']") %>%
+    publicacao <- x |>
+      xml2::xml_find_all("//div[text()='Data da Publica\u00E7\u00E3o/Fonte']/following-sibling::div[@class='docTexto']") |>
       xml2::xml_text()
 
-    fonte <- publicacao %>% stringr::str_extract("\\w+")
+    fonte <- publicacao |>  stringr::str_extract("\\w+")
 
     data_publicacao <- pt_time_extract(publicacao)
 
-    ementa <- x %>%
-      xml2::xml_find_all("//div[text()='Ementa']/following-sibling::div[@class='docTexto']") %>%
+    ementa <- x |>
+      xml2::xml_find_all("//div[text()='Ementa']/following-sibling::div[@class='docTexto']") |>
       xml2::xml_text(trim = TRUE)
 
-    dispositivo <- x %>%
-      xml2::xml_find_all("//div[text()='Ac\u00F3rd\u00E3o']/following-sibling::div[@class='docTexto']") %>%
+    dispositivo <- x |>
+      xml2::xml_find_all("//div[text()='Ac\u00F3rd\u00E3o']/following-sibling::div[@class='docTexto']") |>
       xml2::xml_text()
 
     tibble::tibble(pagina,processo,origem,classe,registro_stj,relator,orgao_julgador,data_julgamento,fonte,data_publicacao,ementa,dispositivo)
