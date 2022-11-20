@@ -14,6 +14,7 @@ Language: pt_BR
 LazyData: true
 Suggests: 
     curl,
+    data.table,
     getPass,
     roxygen2 (>= 6.1.1),
     stringi
