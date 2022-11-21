@@ -40,7 +40,6 @@ stj_baixar_por_autuacao <- function(data_inicial,
 
   url <- "https://processo.stj.jus.br/processo/pesquisa/"
 
-  if (is.null(n)){
 
     corpo <-
       list(
@@ -100,15 +99,15 @@ stj_baixar_por_autuacao <- function(data_inicial,
       stringr::str_extract("\\d+") |>
       as.integer()
 
-    dividir <- \(x) x/100
+    dividir <- \(x) x/40
 
     paginas <- total |>
       dividir() |>
       ceiling()
 
-  } else {
+  if (!is.null(n)){
 
-    paginas <- n
+  paginas <- n
 
   }
 
@@ -122,7 +121,7 @@ stj_baixar_por_autuacao <- function(data_inicial,
     VaiParaPaginaAnterior = "false",
     VaiParaPaginaSeguinte = "true",
     ComProximaPagina = "TRUE",
-    totalRegistrosPorPagina = 100,
+    totalRegistrosPorPagina = 40,
     tipoPesquisaSecundaria = "",
     sequenciaisParteAdvogado = "-1",
     refinamentoAdvogado = "",
