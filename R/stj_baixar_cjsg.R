@@ -211,6 +211,7 @@ stj_baixar_cjsg  <- function(livre = "",
     xml2::xml_find_first("//span[@class='numDocs']") |>
     xml2::xml_text() |>
     stringr::str_extract("\\d+\\.?\\d*") |>
+    stringr::str_remove_all("\\D") |>
     as.numeric()
   } else {
 
