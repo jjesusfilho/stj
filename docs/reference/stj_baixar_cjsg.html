@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">stj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2.9000</span>
       </span>
     </div>
 
@@ -56,8 +56,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stj_baixar_cjsg</span><span class="op">(</span></span>
 <span>  livre <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  aspas <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  data_inicial <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  data_final <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  dt_ini <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  dt_fim <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  dt_ini_pb <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  dt_fim_pb <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  base <span class="op">=</span> <span class="st">"ACOR"</span>,</span>
 <span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  diretorio <span class="op">=</span> <span class="st">"."</span></span>
@@ -74,11 +76,19 @@
 <dd><p>Colocar entre aspas a busca</p></dd>
 
 
-<dt>data_inicial</dt>
+<dt>dt_ini</dt>
+<dd><p>Data inicial do julgamento no formato dd/mm/aaaa</p></dd>
+
+
+<dt>dt_fim</dt>
+<dd><p>Data final do julgamento no formato dd/mm/aaaa</p></dd>
+
+
+<dt>dt_ini_pb</dt>
 <dd><p>Data inicial da publicação no formato "dd/mm/aaaa"</p></dd>
 
 
-<dt>data_final</dt>
+<dt>dt_fim_pb</dt>
 <dd><p>Data final da publicação no formato "dd/mm/aaaa"</p></dd>
 
 
@@ -106,8 +116,8 @@ baixa todas as páginas disponíveis</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="fu">stj_baixar_cjsg</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   data_inicial <span class="op">=</span> <span class="st">"01/07/2019"</span>,</span></span>
-<span class="r-in"><span>    data_final <span class="op">=</span> <span class="st">"30/07/2019"</span></span></span>
+<span class="r-in"><span>   dt_ini <span class="op">=</span> <span class="st">"01/07/2019"</span>,</span></span>
+<span class="r-in"><span>    dt_fim <span class="op">=</span> <span class="st">"30/07/2019"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
