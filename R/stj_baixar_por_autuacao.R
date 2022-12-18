@@ -41,6 +41,8 @@ stj_baixar_por_autuacao <- function(data_inicial,
   url <- "https://processo.stj.jus.br/processo/pesquisa/"
 
 
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
+
     corpo <-
       list(
         aplicacao = "processos",
