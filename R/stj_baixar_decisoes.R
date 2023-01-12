@@ -8,6 +8,7 @@
 #'
 stj_baixar_decisoes <- function(df, diretorio = "."){
 
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
 
   pb <- progress::progress_bar$new(total = nrow(df))
 

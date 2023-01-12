@@ -129,6 +129,8 @@ stj_baixar_cjsg  <- function(livre = "",
 
   #open_search <- utils::URLencode(open_search)
 
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
+
   url1 <- "http://www.stj.jus.br/SCON/"
   r1 <- httr::GET(url1)
 

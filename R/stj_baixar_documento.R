@@ -19,6 +19,7 @@ stj_baixar_documento <- function(sequencial,  diretorio = ".", formato=c("PDF","
 
   url<-paste0("https://processo.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ATC?seq=",sequencial,"&tipo=0&nreg=&SeqCgrmaSessao=&CodOrgaoJgdr=&dt=&formato=",formato,"&salvar=false")
 
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
 
 
    purrr::walk2(url,sequencial, purrr::possibly(~{

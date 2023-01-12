@@ -10,6 +10,9 @@ stj_baixar_documentos_pdf <- function(df, diretorio = "."){
 
 df <- stats::na.omit(df)
 
+
+httr::set_config(httr::config(ssl_verifypeer = 0L))
+
 pb <- progress::progress_bar$new(total = nrow(df))
 
 purrr::pwalk(df, purrr::possibly(function(sequencial, registro, peticao_numero, data_publicacao,...){
