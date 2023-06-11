@@ -2,12 +2,9 @@
 % Please edit documentation in R/stj_ler_por_publicacao.R
 \name{stj_ler_por_publicacao}
 \alias{stj_ler_por_publicacao}
-\alias{stj_ler_por_autuacao}
 \title{Lê htmls baixados com stj_baixar_por_publicacao}
 \usage{
 stj_ler_por_publicacao(arquivos = NULL, diretorio = ".")
-
-stj_ler_por_autuacao(arquivos = NULL, diretorio = ".")
 }
 \arguments{
 \item{arquivos}{Vetor com os caminhos dos arquivos html}

@@ -28,7 +28,7 @@ por meio do dataset incluso ramo.}
 \item{diretorio}{Diretório. Se não informado, atual.}
 }
 \value{
-Html
+Arquivos em csv
 }
 \description{
 Baixa consulta de processos do STJ por data da autuacao

@@ -8,7 +8,7 @@
 #' @param n Número de páginas.
 #' @param diretorio Diretório. Se não informado, atual.
 #'
-#' @return Html
+#' @return Arquivos em csv
 #' @export
 #'
 #' @examples
@@ -36,15 +36,16 @@ stj_baixar_por_autuacao <- function(data_inicial,
     stringr::str_c(collapse= ",")
 
   ## Essa url servirá como referer
-  url2 <- "https://processo.stj.jus.br/processo/pesquisa/?aplicacao=processos.ea"
+  url2 <- "https://processo.stj.jus.br/processo/pesquisa/?aplicacao=processos"
 
   url <- "https://processo.stj.jus.br/processo/pesquisa/"
 
-  if (is.null(n)){
+
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
 
     corpo <-
       list(
-        aplicacao = "processos.ea",
+        aplicacao = "processos",
         acao = "pushconsultarprocessoconsultalimitenaoatendidasjaincluidas",
         descemail = "",
         senha = "",
@@ -100,20 +101,20 @@ stj_baixar_por_autuacao <- function(data_inicial,
       stringr::str_extract("\\d+") |>
       as.integer()
 
-    dividir <- \(x) x/100
+    dividir <- \(x) x/40
 
     paginas <- total |>
       dividir() |>
       ceiling()
 
-  } else {
+  if (!is.null(n)){
 
-    paginas <- n
+  paginas <- n
 
   }
 
   corpo <-  list(
-    aplicacao = "processos.ea",
+    aplicacao = "processos",
     acao = "pushconsultarprocessoconsultalimitenaoatendidasjaincluidas",
     descemail = "",
     senha = "",
@@ -122,7 +123,7 @@ stj_baixar_por_autuacao <- function(data_inicial,
     VaiParaPaginaAnterior = "false",
     VaiParaPaginaSeguinte = "true",
     ComProximaPagina = "TRUE",
-    totalRegistrosPorPagina = 100,
+    totalRegistrosPorPagina = 40,
     tipoPesquisaSecundaria = "",
     sequenciaisParteAdvogado = "-1",
     refinamentoAdvogado = "",
@@ -169,20 +170,30 @@ stj_baixar_por_autuacao <- function(data_inicial,
   df <- data_final |>
     stringr::str_replace_all("/","_")
 
-  purrr::walk(1:paginas,purrr::possibly(~{
+
+
+
+  purrr::walk(0:paginas,purrr::possibly(~{
 
     pb$tick()
 
 
 
-    arquivo <- file.path(diretorio, paste0("stj_por_autuacao_data_inicial_",di,"_data_final_",df,"_pagina_",.x, ".html"))
+    arquivo <- file.path(diretorio, paste0("stj_por_autuacao_data_inicial_",di,"_data_final_",df,"_pagina_",.x, ".csv"))
+
+
 
     corpo$NumPaginaAtual <- .x
 
 
     httr::RETRY("POST", url = url, body = corpo,  encode="form",
                 httr::add_headers(`Referer` = url2),
-                httr::timeout(30), httr::write_disk(arquivo))
+                httr::timeout(30)) |>
+    httr::content() |>
+      xml2::xml_find_first("//textarea[@class='clsCopiarParaCSV']") |>
+      xml2::xml_text() |>
+      cat(file = arquivo)
+
 
 
 

@@ -18,7 +18,7 @@
 #' }
 stj_baixar_processo <- function(numero = NULL, diretorio = ".",documentos = FALSE) {
 
-  httr::set_config(httr::config(ssl_verifypeer = FALSE))
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
 
   if (stringr::str_remove_all(numero[1],"\\D+") %>% nchar() == 20) {
 

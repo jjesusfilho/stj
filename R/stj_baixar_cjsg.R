@@ -129,6 +129,8 @@ stj_baixar_cjsg  <- function(livre = "",
 
   #open_search <- utils::URLencode(open_search)
 
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
+
   url1 <- "http://www.stj.jus.br/SCON/"
   r1 <- httr::GET(url1)
 
@@ -211,6 +213,7 @@ stj_baixar_cjsg  <- function(livre = "",
     xml2::xml_find_first("//span[@class='numDocs']") |>
     xml2::xml_text() |>
     stringr::str_extract("\\d+\\.?\\d*") |>
+    stringr::str_remove_all("\\D") |>
     as.numeric()
   } else {
 

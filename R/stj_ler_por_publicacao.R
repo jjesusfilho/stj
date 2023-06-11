@@ -30,12 +30,12 @@ stj_ler_por_publicacao <- function(arquivos = NULL, diretorio  = "."){
 
 
    registro <- x  |>
-      xml2::xml_find_all('//span[@class="clsBlocoProcessoColuna clsBlocoProcessoColuna1 classSpanProcessoUF"]/a') %>%
-      xml2::xml_attr('href')  %>%
+      xml2::xml_find_all('//span[@class="clsBlocoProcessoColuna clsBlocoProcessoColuna1 classSpanProcessoUF"]/a') |>
+      xml2::xml_attr('href')  |>
       stringr::str_extract("(?<=termo=)\\d+")
 
   processo <- x  |>
-      xml2::xml_find_all('//span[@class="clsBlocoProcessoColuna clsBlocoProcessoColuna1 classSpanProcessoUF"]/a') %>%
+      xml2::xml_find_all('//span[@class="clsBlocoProcessoColuna clsBlocoProcessoColuna1 classSpanProcessoUF"]/a') |>
       xml2::xml_text()
 
   classe <- processo |>
@@ -47,13 +47,12 @@ stj_ler_por_publicacao <- function(arquivos = NULL, diretorio  = "."){
   origem <- processo |>
         stringr::str_extract("\\w+$")
 
+
+
+
   tibble::tibble(registro, classe, processo_stj, origem)
 
 
   }, NULL))
 
 }
-
-#' @rdname stj_ler_por_publicacao
-#' @export
-stj_ler_por_autuacao <- stj_ler_por_publicacao

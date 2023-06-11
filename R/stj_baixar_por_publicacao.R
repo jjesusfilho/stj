@@ -40,6 +40,9 @@ stj_baixar_por_publicacao <- function(data_inicial,
 
   url <- "https://processo.stj.jus.br/processo/pesquisa/"
 
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
+
+
   if (is.null(n)){
 
   corpo <-

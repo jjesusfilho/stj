@@ -22,6 +22,7 @@ stj_baixar_docs_pdf <- function(sequencial, registro, data, diretorio  = "."){
     lubridate::dmy() %>%
     stringr::str_remove_all("\\D")
 
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
 
   purrr::pwalk(list(x = sequencial, y = registro, z = data), purrr::possibly(function(x,y,z) {
 

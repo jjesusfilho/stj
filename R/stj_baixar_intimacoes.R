@@ -22,6 +22,9 @@ stj_baixar_intimacoes <- function (usuario = NULL, senha = NULL, diretorio = "."
     }
   }
 
+
+  httr::set_config(httr::config(ssl_verifypeer = 0L))
+
   i <- 1
 
   url <- "https://www.stj.jus.br/portalIntimacao/"
