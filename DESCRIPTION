@@ -38,7 +38,7 @@ Imports:
     progress,
     re2,
     utils
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 URL: https://github.com/jjesusfilho/stj
 BugReports: https://github.com/jjesusfilho/stj/issues
 Depends: 
