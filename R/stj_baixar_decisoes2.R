@@ -21,7 +21,7 @@ stj_baixar_decisoes2 <- function(registro,sequencial, diretorio = "."){
 
                  url <- paste0("https://processo.stj.jus.br/processo/dj/documento/?=&sequencial=", .y,"&num_registro=",.x)
 
-                 httr::GET(url, httr::write_disk(url, arquivo, overwrite = T))
+                 httr::GET(url, httr::write_disk( arquivo, overwrite = T))
 
                  }, NULL))
 
