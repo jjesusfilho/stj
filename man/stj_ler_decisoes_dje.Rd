@@ -2,20 +2,20 @@
 % Please edit documentation in R/stj_ler_decisoes_dje.R
 \name{stj_ler_decisoes_dje}
 \alias{stj_ler_decisoes_dje}
-\title{Ler decisões do STJ baixados do dje}
+\title{Lê decisoes baixadas do DJE}
 \usage{
-stj_ler_decisoes_dje(arquivos = NULL, diretorio = ".", assinatura = FALSE)
+stj_ler_decisoes_dje(arquivos = NULL, assinatura = FALSE, diretorio = ".")
 }
 \arguments{
 \item{arquivos}{Vetor de arquivos}
 
-\item{diretorio}{Alternativamente, informar diretórios.}
+\item{assinatura}{FALSE para remover.}
 
-\item{assinatura}{FALSE para remover as assinaturas.}
+\item{diretorio}{Alternativa aos arquivos.}
 }
 \value{
 tibble
 }
 \description{
-Ler decisões do STJ baixados do dje
+Lê decisoes baixadas do DJE
 }

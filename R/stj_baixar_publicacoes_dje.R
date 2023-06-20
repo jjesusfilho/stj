@@ -14,7 +14,7 @@ stj_baixar_publicacoes_dje <- function(registro, data, diretorio){
 df <- tibble::tibble(registro, data) |>
       dplyr::distinct()
 
-purrr::walk(df$registro, df$data, purrr::possibly(~{
+purrr::walk2(df$registro, df$data, purrr::possibly(~{
 
 registro1 <- .x |>
              stringr::str_remove_all("\\D")
