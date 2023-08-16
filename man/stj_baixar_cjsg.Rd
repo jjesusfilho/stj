@@ -6,6 +6,7 @@
 \usage{
 stj_baixar_cjsg(
   livre = "",
+  classe = "",
   aspas = FALSE,
   dt_ini = "",
   dt_fim = "",
@@ -18,6 +19,8 @@ stj_baixar_cjsg(
 }
 \arguments{
 \item{livre}{Se deixar em branco, informe as datas.}
+
+\item{classe}{Informar a classe, e.g., classe = "HC ou Resp"}
 
 \item{aspas}{Colocar entre aspas a busca}
 

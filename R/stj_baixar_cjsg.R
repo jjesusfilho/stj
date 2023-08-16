@@ -1,6 +1,7 @@
 #' Extrair metadados da jurisprudência do STJ
 #'
 #' @param livre Se deixar em branco, informe as datas.
+#' @param classe Informar a classe, e.g., classe = "HC ou Resp"
 #' @param aspas Colocar entre aspas a busca
 #' @param dt_ini Data inicial do julgamento no formato dd/mm/aaaa
 #' @param dt_fim Data final do julgamento no formato dd/mm/aaaa
@@ -22,6 +23,7 @@
 #'     )
 #' }
 stj_baixar_cjsg  <- function(livre = "",
+                                  classe = "",
                                   aspas=FALSE,
                                   dt_ini = "",
                                   dt_fim = "",
@@ -151,7 +153,7 @@ stj_baixar_cjsg  <- function(livre = "",
       p = "true",
       tp = "T",
       processo = "",
-      classe = "",
+      classe = classe,
       uf = "",
       relator = "",
       dtpb = dtpb,
@@ -245,6 +247,7 @@ stj_baixar_cjsg  <- function(livre = "",
                   operador = "e",
                   l = 10,
                   livre = livre,
+                  classe = classe,
                   i = .x,
                   tp = TRUE
                 ), encode = "form",
