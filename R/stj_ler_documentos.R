@@ -1,9 +1,9 @@
 #' Ler documentos do STJ
 #'
-#' @param diretorio informar diretório, apenas se
-#'     não informar arquivos.
 #' @param arquivos  se arquivos for NULL,
 #'     informar diretório.
+#' @param diretorio informar diretório, apenas se
+#'     não informar arquivos.
 #' @param formato "html" ou "pdf"
 #'
 #' @return tibble com sequenciais e documentos

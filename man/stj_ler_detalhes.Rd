@@ -4,13 +4,13 @@
 \alias{stj_ler_detalhes}
 \title{Ler detalhes dos processos do STJ}
 \usage{
-stj_ler_detalhes(diretorio = ".", arquivos = NULL, wide = FALSE)
+stj_ler_detalhes(arquivos = NULL, diretorio = ".", wide = FALSE)
 }
 \arguments{
-\item{diretorio}{Diretório se arquivos não forem informados}
-
 \item{arquivos}{Se os caminhos para os arquivos forem fornecidos
 o diretório é ignorado.}
+
+\item{diretorio}{Diretório se arquivos não forem informados}
 
 \item{wide}{Colocar no formato largo? Padrão é longo.}
 }

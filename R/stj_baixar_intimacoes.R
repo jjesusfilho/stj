@@ -36,10 +36,12 @@ stj_baixar_intimacoes <- function (usuario = NULL, senha = NULL, diretorio = "."
   repeat {
 
 
-  viewid <- xml2::xml_attr(xml2::xml_find_first(xml2::read_html(httr::content(httr::GET(url1),
-                                                                              "text")), "//input[@name='javax.faces.ViewState']"),
-                           "value")
-
+  viewid <- url1 %>%
+    httr::GET() %>%
+    httr::content("text") %>%
+    xml2::read_html() %>%
+    xml2::xml_find_first("//input[@name='javax.faces.ViewState']") %>%
+    xml2::xml_attr("value")
 
   body1 <- list(j_idt17 = "j_idt17", `j_idt17:j_idt22` = usuario,
                 `j_idt17:j_idt26` = "", javax.faces.ViewState = viewid,

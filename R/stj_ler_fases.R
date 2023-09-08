@@ -1,9 +1,8 @@
 #' Ler fases dos processos do STJ
 #'
-#' @param diretorio Diretório se arquivos não forem informados
 #' @param arquivos Se os caminhos para os arquivos forem fornecidos
 #'     o diretório é ignorado.
-#'
+#' @param diretorio Diretório se arquivos não forem informados
 #' @return tibble com fases do processo
 #' @export
 #'
@@ -11,7 +10,7 @@
 #' \dontrun{
 #' df <- ler_fases_stj(diretorio = ".")
 #' }
-stj_ler_fases <- function(diretorio = ".", arquivos = NULL){
+stj_ler_fases <- function(arquivos = NULL, diretorio = "."){
 
   if (is.null(arquivos)){
 

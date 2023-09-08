@@ -1,8 +1,8 @@
 #' Ler detalhes dos processos do STJ
 #'
-#' @param diretorio Diretório se arquivos não forem informados
 #' @param arquivos Se os caminhos para os arquivos forem fornecidos
 #'     o diretório é ignorado.
+#' @param diretorio Diretório se arquivos não forem informados
 #' @param wide Colocar no formato largo? Padrão é longo.
 #'
 #' @return tibble com detalhes do processo
@@ -12,7 +12,7 @@
 #' \dontrun{
 #' df <- ler_detalhes_stj(diretorio = ".")
 #' }
-stj_ler_detalhes <- function(diretorio = ".", arquivos = NULL, wide = FALSE){
+stj_ler_detalhes <- function(arquivos = NULL, diretorio = ".", wide = FALSE){
 
   if (is.null(arquivos)){
 

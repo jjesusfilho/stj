@@ -4,13 +4,13 @@
 \alias{stj_ler_fases}
 \title{Ler fases dos processos do STJ}
 \usage{
-stj_ler_fases(diretorio = ".", arquivos = NULL)
+stj_ler_fases(arquivos = NULL, diretorio = ".")
 }
 \arguments{
-\item{diretorio}{Diretório se arquivos não forem informados}
-
 \item{arquivos}{Se os caminhos para os arquivos forem fornecidos
 o diretório é ignorado.}
+
+\item{diretorio}{Diretório se arquivos não forem informados}
 }
 \value{
 tibble com fases do processo
