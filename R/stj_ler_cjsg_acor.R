@@ -23,7 +23,7 @@ stj_ler_cjsg_acor <- function(arquivos = NULL, diretorio =  "."){
     pagina <- stringr::str_extract(.x, "(?<=pagina_)\\d+")
     
     processo <- x |>
-      xml2::xml_find_all("//div[@class='docTexto']/text()[following-sibling::br][1]") |>
+      xml2::xml_find_all("//div[@class='paragrafoBRS'][div[text()='Processo']]//div[@class='docTexto']/text()[following-sibling::br][1]") |>
       xml2::xml_text(trim = TRUE)
     
     
@@ -31,15 +31,15 @@ stj_ler_cjsg_acor <- function(arquivos = NULL, diretorio =  "."){
       stringr::str_extract("\\w{2}$")
     
     classe <- x |>
-      xml2::xml_find_all("//div[@class='docTexto']/text()[following-sibling::br][2]") |>
+      xml2::xml_find_all("//div[@class='paragrafoBRS'][div[text()='Processo']]//div[@class='docTexto']/text()[following-sibling::br][2]") |>
       xml2::xml_text(trim = TRUE)
     
     registro_stj <- x |>
-      xml2::xml_find_all("//div[@class='docTexto']/text()[preceding-sibling::br][2]") |>
+      xml2::xml_find_all("//div[@class='paragrafoBRS'][div[text()='Processo']]//div[@class='docTexto']/text()[preceding-sibling::br][2]") |>
       xml2::xml_text(trim = TRUE)
     
     relator <- x |>
-      xml2::xml_find_all("//div[@class='docTitulo'][contains(text(),'Relator')]/following-sibling::div[@class='docTexto']") |>
+      xml2::xml_find_all("//div[@class='paragrafoBRS']//div[@class='docTitulo'][text()='Relator']/following-sibling::div[@class='docTexto']|//div[@class='paragrafoBRS']//div[@class='docTitulo'][text()='Relatora']/following-sibling::div[@class='docTexto']") |>
       xml2::xml_text() |>
       stringr::str_extract("(?<=Ministr[ao]\\s).*(?=\\s\\()")
     
@@ -69,7 +69,7 @@ stj_ler_cjsg_acor <- function(arquivos = NULL, diretorio =  "."){
       xml2::xml_text()
     
     url_inteiro_teor <- x |> 
-         xml2::xml_find_all("//a[@title='Exibir o inteiro teor do ac\u00F3rd\u00E3o.']") |> 
+         xml2::xml_find_all("//div[@class='col-auto clsIconesAcoes']/a[@title='Exibir o inteiro teor do ac\u00F3rd\u00E3o.']") |> 
          xml2::xml_attr("href") |> 
          stringr::str_extract("SCON.+") |> 
          xml2::url_absolute("https://scon.stj.jus.br/")
