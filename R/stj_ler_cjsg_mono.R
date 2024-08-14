@@ -78,7 +78,7 @@ stj_ler_cjsg_mono <- function(arquivos = NULL, diretorio =  "."){
       xml2::xml_find_all("//div[@class='col-auto clsIconesAcoes']") |>
       purrr::map_chr(purrr::possibly(~{
         .x |>
-          xml2::xml_find_first("..//a[@title='Decisão Monocrática Certificada']") |>
+          xml2::xml_find_first("..//a[@title='Decis\u00E3o Monocr\u00E1tica Certificada']") |>
           xml2::xml_attr("href")
       }, NA)) |>
       stringr::str_extract("https.+(?='\\))")

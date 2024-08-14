@@ -3,8 +3,7 @@
 #' Baixa  e organiza decisões do STJ
 #'
 #'
-#' @docType package
-#' @name stj
+"_PACKAGE"
 NULL
 
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
