@@ -12,20 +12,22 @@ stj_baixar_decisoes <- function(df, diretorio = "."){
   
   pb <- progress::progress_bar$new(total = nrow(df))
   
-  purrr::pwalk(list(x = df$registro, y = df$sequencial, z = df$url, w = df$componente), purrr::possibly(function(x,y,z,w) {
+  purrr::pwalk(list(x = df$registro, y = df$sequencial, z = df$url, w = df$fonte), purrr::possibly(function(x,y,z,w) {
     
     pb$tick()
     
     arquivo <- file.path(diretorio, paste0("registro_", x, "_sequencial_",y, ".pdf"))
     
-    if(w == "ITA") {
-
-      suppressWarnings(httr::GET(a$url) |>
-        httr::content() |>
-        xml2::xml_find_first("//a") |>
-        xml2::xml_attr("href") |> 
-        stringr::str_replace("https://ww2", "https://www") |> 
-        httr::GET(httr::write_disk(arquivo, overwrite = TRUE)))
+    if(w == "revista") {
+      
+      suppressWarnings(httr::GET(z) |>
+                         httr::content() |>
+                         xml2::xml_find_first("//a") |>
+                         xml2::xml_attr("href") |> 
+                         stringr::str_replace("https://ww2", "https://www") |> 
+                         httr::GET(httr::write_disk(arquivo, overwrite = TRUE)))
+      
+      Sys.sleep(1)
       
     } else {
       httr::GET(z) |>
