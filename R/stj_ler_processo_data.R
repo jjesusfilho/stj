@@ -81,11 +81,23 @@ stj_ler_processo_data <- function(arquivos = NULL, diretorio = "."){
         xml2::xml_find_all(".//span[@class='clsProcessosListaEtiquetaCabecalho'][contains(.,'Tribunal de Origem')]/following-sibling::span") |>
         xml2::xml_text()
       
-     list(classe = classe, numero = numero, uf = uf, registro = registro, dt_autuacao = dt_autuacao, assuntos = assuntos, 
-                     ramo_do_direito = ramo_do_direito, tribunal_de_origem = tribunal_de_origem, partes = partes) |> 
-                  purrr::map_if(rlang::is_empty, ~NA_character_) |> 
-                  tibble::as_tibble()
+      
+      relator <- .x |>
+        xml2::xml_find_all(".//span[@class='clsProcessosListaEtiquetaCabecalho'][contains(.,'Relator')]/following-sibling::span") |>
+        xml2::xml_text()
+      
+      numeros_de_origem <- .x |>
+        xml2::xml_find_all(".//span[@class='clsProcessosListaEtiquetaCabecalho'][contains(.,'N\u00FAmeros de Origem')]/following-sibling::span") |>
+        xml2::xml_text()
 
+      
+      list(classe = classe, numero = numero, uf = uf, registro = registro, dt_autuacao = dt_autuacao, assuntos = assuntos, 
+           ramo_do_direito = ramo_do_direito, relator = relator, 
+           tribunal_de_origem = tribunal_de_origem, numeros_de_origem = numeros_de_origem,
+             partes = partes) |> 
+        purrr::map_if(rlang::is_empty, ~NA_character_) |> 
+        tibble::as_tibble()
+      
       
     }, NULL))
     
