@@ -57,7 +57,7 @@ stj_baixar_intimacoes <- function (usuario = NULL, senha = NULL, diretorio = "."
 
   r3 <- httr::POST(url1, encode = "form", body = body2)
 
-  if (length(r3$content) >  16000 | i == 10) {
+  if (length(r3$content) >  17000 | i == 10) {
 
     break()
 
