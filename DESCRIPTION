@@ -1,6 +1,6 @@
 Package: stj
 Title: Baixa e organiza decisões do Superior Tribunal de Justiça
-Version: 0.0.2.9001
+Version: 0.0.3.9001
 Authors@R: 
     person(given = "Jose",
            family = "de Jesus Filho",
@@ -27,6 +27,7 @@ Imports:
     tidyr,
     lubridate,
     httr,
+    httr2,
     xml2,
     abjutils,
     tibble,
@@ -39,7 +40,7 @@ Imports:
     progress,
     re2,
     utils
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 URL: https://github.com/jjesusfilho/stj
 BugReports: https://github.com/jjesusfilho/stj/issues
 Depends: 
