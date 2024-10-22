@@ -22,14 +22,10 @@ stj_ler_fases <- function(arquivos = NULL, diretorio = "."){
 
   }
 
-  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map_dfr(arquivos,purrr::possibly(~{
 
-    pb$tick()
-
-    registro <- stringr::str_extract(.x,"(?<=stj_).+?(?=.html)") |>
-               stringr::str_remove_all("\\D+")
+    nome_arquivo <- basename(.x)
 
     resposta <- xml2::read_html(.x)
 
@@ -40,7 +36,7 @@ stj_ler_fases <- function(arquivos = NULL, diretorio = "."){
     fase <-xml2::xml_find_all(resposta,"//*[@class='classSpanFaseTexto']|//*[@class='classSpanFaseTexto clssSpanFaseTextoComLink']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble (registro_stj = registro,  data,  fase)
+    tibble::tibble (nome_arquivo,  data,  fase)
 
   },NULL))
 
