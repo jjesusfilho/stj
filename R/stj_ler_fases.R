@@ -38,6 +38,6 @@ stj_ler_fases <- function(arquivos = NULL, diretorio = "."){
 
     tibble::tibble (nome_arquivo,  data,  fase)
 
-  },NULL))
+  },NULL), .progress = TRUE)
 
 }
