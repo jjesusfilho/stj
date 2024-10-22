@@ -41,6 +41,7 @@ stj_classificar_writ <- function(x, preprocessado = TRUE){
     re2::re2_detect(x,"absolv\\w+") ~ "concedido",
     re2::re2_detect(x, "acolher\\w+|\\bprocedente") ~ "concedido",
     re2::re2_detect(x,"de*neg") ~ "denegado",
+    re2::re2_detect(x,"nao concedid") ~ "denegado",
     re2::re2_detect(x,"^conce\\w+") ~ "concedido",
     re2::re2_detect(x,"^conhe\\w+") ~ "concedido",
     re2::re2_detect(x, "(nao\\sconhec\\w+|nao\\sse\\sconhec\\w+)") ~ "n\u00e3o conhecido",
