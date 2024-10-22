@@ -11,8 +11,8 @@ stj_classificar_writ <- function(x, preprocessado = TRUE){
 
   if (!preprocessado){
 
-    x<- x |>
-      stringr::str_squish()
+    x <- x |>
+      stringr::str_squish() |>
     tolower() |>
       stringi::stri_trans_general("latin-ascii")
 
@@ -24,7 +24,7 @@ stj_classificar_writ <- function(x, preprocessado = TRUE){
     stringr::str_detect(x, "(?=.*\\bneg[oa]\\w*\\b)(?=.*\\bprejudicado\\b)") ~ "duvida",
     stringr::str_detect(x, "(?=.*\\bacolh\\w+\\b)(?=.*\\bneg[ao]\\w*\\b)") ~ "duvida",
     re2::re2_detect(x, "expeco a ordem") ~ "concedido",
-    re2::re2_detect(x,"\\boff?icio") ~ "de oficio",
+    re2::re2_detect(x,"\\boficio") ~ "de oficio",
     re2::re2_detect(x,"nao concedo") ~ "denegado",
     re2::re2_detect(x, "concedo")  ~ "concedido",
     re2::re2_detect(x, "\\bdefiro")  ~ "deferido",

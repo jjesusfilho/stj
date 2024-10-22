@@ -27,7 +27,12 @@ stj_ler_fases <- function(arquivos = NULL, diretorio = "."){
 
     nome_arquivo <- basename(.x)
 
+
     resposta <- xml2::read_html(.x)
+
+    registro <- resposta |>
+                xml2::xml_find_first('//span[@id="idSpanNumeroRegistro"]') |>
+                xml2::xml_text(trim = TRUE)
 
     data <-xml2::xml_find_all(resposta,"//*[@class='clsFaseDataHora']") %>%
       xml2::xml_text() |>
@@ -36,7 +41,7 @@ stj_ler_fases <- function(arquivos = NULL, diretorio = "."){
     fase <-xml2::xml_find_all(resposta,"//*[@class='classSpanFaseTexto']|//*[@class='classSpanFaseTexto clssSpanFaseTextoComLink']") %>%
       xml2::xml_text(trim=T)
 
-    tibble::tibble (nome_arquivo,  data,  fase)
+    tibble::tibble (nome_arquivo, registro,  data,  fase)
 
   },NULL), .progress = TRUE)
 
