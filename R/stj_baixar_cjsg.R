@@ -7,6 +7,9 @@
 #' @param dt_fim Data final do julgamento no formato dd/mm/aaaa
 #' @param dt_ini_pb Data inicial da publicação no formato "dd/mm/aaaa"
 #' @param dt_fim_pb Data final da publicação no formato "dd/mm/aaaa"
+#' @param filtro_por_orgao Filtro por órgão.
+#' @param filtro_por_ministro Filtro por ministro.
+#' @param filtro_por_nota Filtro por nota.
 #' @param base "ACOR" ou "MONO"
 #' @param n Número de páginas a serem baixadas. Se NULL,
 #'     baixa todas as páginas disponíveis
@@ -29,6 +32,9 @@ stj_baixar_cjsg  <- function(livre = "",
                                   dt_fim = "",
                                   dt_ini_pb = "",
                                   dt_fim_pb = "",
+                                  filtro_por_orgao = "",
+                                  filtro_por_ministro = "",
+                                  filtro_por_nota = "",
                                   base = "ACOR",
                                   n = NULL,
                                   diretorio = "."){
@@ -144,9 +150,9 @@ stj_baixar_cjsg  <- function(livre = "",
       i = "1",
       b = b,
       livre = livre,
-      filtroPorOrgao = "",
-      filtroPorMinistro = "",
-      filtroPorNota = "",
+      filtroPorOrgao = filtro_por_orgao,
+      filtroPorMinistro = filtro_por_ministro,
+      filtroPorNota = filtro_por_nota,
       data = data,
       operador = "e",
       thesaurus = "JURIDICO",
@@ -238,9 +244,9 @@ stj_baixar_cjsg  <- function(livre = "",
                 body = list(
                   numDocsPagina = "10",
                   tipo_visualizacao = "",
-                  filtroPorOrgao = "",
-                  filtroPorMinistro = "",
-                  filtroPorNota = "",
+                  filtroPorOrgao = filtro_por_orgao,
+                  filtroPorMinistro = filtro_por_ministro,
+                  filtroPorNota = filtro_por_nota,
                   b = b,
                   p = "true",
                   data = data,

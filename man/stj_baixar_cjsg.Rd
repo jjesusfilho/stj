@@ -12,6 +12,9 @@ stj_baixar_cjsg(
   dt_fim = "",
   dt_ini_pb = "",
   dt_fim_pb = "",
+  filtro_por_orgao = "",
+  filtro_por_ministro = "",
+  filtro_por_nota = "",
   base = "ACOR",
   n = NULL,
   diretorio = "."
@@ -31,6 +34,12 @@ stj_baixar_cjsg(
 \item{dt_ini_pb}{Data inicial da publicação no formato "dd/mm/aaaa"}
 
 \item{dt_fim_pb}{Data final da publicação no formato "dd/mm/aaaa"}
+
+\item{filtro_por_orgao}{Filtro por órgão.}
+
+\item{filtro_por_ministro}{Filtro por ministro.}
+
+\item{filtro_por_nota}{Filtro por nota.}
 
 \item{base}{"ACOR" ou "MONO"}
 
