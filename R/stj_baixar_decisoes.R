@@ -10,29 +10,28 @@ stj_baixar_decisoes <- function(df, diretorio = "."){
 
   httr::set_config(httr::config(ssl_verifypeer = 0L))
 
-
-  purrr::pwalk(list(x = df$registro, y = df$sequencial, z = df$url, w = df$componente), purrr::possibly(function(x,y,z,w) {
+ 
+  purrr::pwalk(list(x = df$registro, y = df$sequencial, z = df$url), purrr::possibly(function(x,y,z) {
 
     arquivo <- file.path(diretorio, paste0("registro_", x, "_sequencial_",y, ".pdf"))
 
-    if("ITA" %in% w) {
 
-      suppressWarnings(httr::GET(a$url) |>
-        httr::content() |>
-        xml2::xml_find_first("//a") |>
-        xml2::xml_attr("href") |>
-        stringr::str_replace("https://ww2", "https://www") |>
-        httr::GET(`istl-infinite-loop` = "1",
-          httr::write_disk(arquivo, overwrite = TRUE)))
+    r1 <- httr::GET(z, httr::add_headers(`istl-infinite-loop` = 1))
 
-    } else {
-      httr::GET(z) |>
+    if(httr::http_type(r1) != "application/pdf"){
+
+      r1 |>
         httr::content() |>
         xml2::xml_find_first("//a") |>
         xml2::xml_attr("href") |>
         xml2::url_absolute("https://processo.stj.jus.br") |>
-        httr::GET(`istl-infinite-loop` = "1",
-          httr::write_disk(arquivo, overwrite = TRUE))
+        httr::GET(httr::write_disk(arquivo, overwrite = TRUE),httr::add_headers(`istl-infinite-loop` = 1))
+
+    } else {
+
+      writeBin(r1$content,arquivo)
     }
+
+
   },NULL), .progress = TRUE)
 }
